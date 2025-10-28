@@ -6,28 +6,68 @@ import { User, Mail, Phone } from 'lucide-react'
 export default function TeamSection() {
   const teamMembers = [
     {
-      name: "Mr. Elias Mamo",
-      position: "Managing Director",
+      name: "Ato Elias Mammo",
+      position: "General Manager",
+      qualification: "B.Sc. Civil Engineering, Addis Ababa University",
+      experience: "25 years",
       image: "/api/placeholder/300/300",
       description: "Leading MACRO with extensive experience in construction management and strategic planning."
     },
     {
-      name: "Mr. Samuel Kebede",
+      name: "Ato Asamnew Asfaw",
       position: "Manager",
+      qualification: "B.Sc. Civil Engineering, Addis Ababa University",
+      experience: "23 years",
       image: "/api/placeholder/300/300", 
       description: "Overseeing day-to-day operations and ensuring project delivery excellence."
     },
     {
-      name: "Mr. Shimelis Abay",
+      name: "Ato Gashaw Asaye",
       position: "Deputy Manager",
+      qualification: "B.Sc. Agricultural Economics, Jimma University; M.Sc. Project Management",
+      experience: "14 years",
       image: "/api/placeholder/300/300",
       description: "Supporting management operations and coordinating with various project teams."
     },
     {
-      name: "Mrs. Mekdes Tsegaye",
+      name: "Samuel Sultan Seid",
+      position: "Engineering Head",
+      qualification: "B.Sc. Civil Engineering, Gonder University",
+      experience: "7 years",
+      image: "/api/placeholder/300/300",
+      description: "Leading engineering operations and technical project management."
+    },
+    {
+      name: "Ato Aklilu Abera",
+      position: "HR and Finance Head",
+      qualification: "B.A. Accounting & Finance, Principal Health & College; Diploma from Mekelle University",
+      experience: "21 years",
+      image: "/api/placeholder/300/300",
+      description: "Managing human resources and financial operations."
+    },
+    {
+      name: "W/ro Mekdes Tsegaye",
       position: "Finance Head",
+      qualification: "B.A. Accounting, Addis Ababa University; M.A. Accounting & Finance, Civil Service University",
+      experience: "12 years",
       image: "/api/placeholder/300/300",
       description: "Managing financial operations and ensuring sound fiscal management across all projects."
+    },
+    {
+      name: "Ato Abiy Teshome",
+      position: "Equipment Head",
+      qualification: "B.Sc. Automotive Technology, Adama University",
+      experience: "16 years",
+      image: "/api/placeholder/300/300",
+      description: "Overseeing equipment management and maintenance operations."
+    },
+    {
+      name: "Ato Tadios Girma",
+      position: "HR Head",
+      qualification: "B.A. Business Management, Infolink University",
+      experience: "20 years",
+      image: "/api/placeholder/300/300",
+      description: "Leading human resources and administrative functions."
     }
   ]
 
@@ -70,7 +110,9 @@ export default function TeamSection() {
               {/* Profile Info */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-brand-600 font-semibold mb-3">{member.position}</p>
+                <p className="text-brand-600 font-semibold mb-2">{member.position}</p>
+                <p className="text-gray-500 text-xs mb-2">{member.qualification}</p>
+                <p className="text-brand-500 text-xs mb-3">{member.experience} Experience</p>
                 <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
               </div>
             </motion.div>

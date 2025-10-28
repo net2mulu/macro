@@ -8,45 +8,45 @@ export default function ServicesPage() {
   const services = [
     {
       icon: Building2,
-      title: "Real Estate Construction",
-      description: "Complete construction services for residential and commercial real estate projects, from planning to completion.",
-      features: ["Residential Buildings", "Commercial Complexes", "Mixed-Use Developments", "Retail Spaces", "Office Buildings"],
-      image: "/background/2.png"
+      title: "Road & Building Construction",
+      description: "Expert road and building construction services specializing in highways, bridges, infrastructure, and commercial buildings.",
+      features: ["Road Construction & Rehabilitation", "Bridge Engineering", "Building Construction", "Earthworks", "Drainage Structures"],
+      image: "/background/1.png"
     },
     {
       icon: MapPin,
-      title: "Road Construction",
-      description: "Expert road construction services including highways, urban roads, and rural access roads.",
-      features: ["Highway Construction", "Urban Roads", "Rural Access Roads", "Sidewalks & Curbs", "Parking Lots"],
-      image: "/background/3.png"
-    },
-    {
-      icon: Zap,
-      title: "Bridge Construction",
-      description: "Specialized bridge construction and infrastructure development for transportation networks.",
-      features: ["Highway Bridges", "Pedestrian Bridges", "Infrastructure Bridges", "Retaining Walls", "Culverts"],
-      image: "/background/4.png"
-    },
-    {
-      icon: Wrench,
-      title: "General Contracting",
-      description: "Comprehensive general contracting services ensuring smooth project execution from start to finish.",
-      features: ["Project Management", "Subcontractor Coordination", "Quality Control", "Budget Management", "Timeline Optimization"],
-      image: "/background/5.png"
-    },
-    {
-      icon: Users,
-      title: "Construction Management",
-      description: "Professional construction management services for complex projects requiring expert oversight.",
-      features: ["Project Planning", "Resource Management", "Timeline Coordination", "Risk Assessment", "Safety Protocols"],
-      image: "/background/6.png"
+      title: "Water Work Construction",
+      description: "Specialized water infrastructure development including water supply systems, treatment facilities, and distribution networks.",
+      features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations"],
+      image: "/background/2.png"
     },
     {
       icon: Home,
       title: "Real Estate Development",
-      description: "End-to-end real estate development services from land acquisition to project delivery.",
-      features: ["Land Development", "Property Development", "Investment Projects", "Feasibility Studies", "Market Analysis"],
-      image: "/background/1.png"
+      description: "Creating sustainable and quality living spaces with innovative designs and compound facilities including villas and apartments.",
+      features: ["Residential Villas", "Apartment Complexes", "Community Building", "Compound Facilities", "Design & Build"],
+      image: "/background/3.png"
+    },
+    {
+      icon: Zap,
+      title: "Rental of Machines",
+      description: "Comprehensive equipment rental services including excavators, graders, compactors, and construction machinery.",
+      features: ["Excavators & Dozers", "Motor Graders", "Roller Compactors", "Asphalt Pavers", "Truck Mixers"],
+      image: "/background/4.png"
+    },
+    {
+      icon: Building2,
+      title: "Retails of Construction Materials",
+      description: "Retail supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
+      features: ["Aggregates", "Concrete & Asphalt", "Building Materials", "Rebars & Steel", "Construction Supplies"],
+      image: "/background/5.png"
+    },
+    {
+      icon: Users,
+      title: "Trading (Import & Export)",
+      description: "Import and export of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
+      features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Export Services"],
+      image: "/background/6.png"
     }
   ]
 
@@ -81,8 +81,8 @@ export default function ServicesPage() {
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Services</h1>
             <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto drop-shadow-lg">
-              Comprehensive construction and real estate development services 
-              delivered with excellence and precision
+              Your trusted partner for construction, infrastructure, real estate development, 
+              equipment rental, and trading services across Ethiopia
             </p>
           </div>
         </div>

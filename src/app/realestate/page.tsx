@@ -88,8 +88,9 @@ export default function RealEstatePage() {
                 Real Estate <span className="text-brand-300">Development</span>
               </h1>
               <p className="text-xl text-white max-w-2xl mb-8 drop-shadow-lg">
-                Transforming visions into reality through premium real estate development. 
-                Discover modern living spaces designed for your lifestyle.
+                MACRO Real Estate is engaged in building villas and apartments with peculiar designs. 
+                We provide quality housing and create safe, favorable, and attractive environments 
+                with full compound facilities.
               </p>
               <div className="flex gap-4">
                 <Link
@@ -125,22 +126,27 @@ export default function RealEstatePage() {
       {/* Project Overview */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">MACRO Real Estate Project</h2>
+            <p className="text-lg text-gray-600">CMC, Summit area</p>
+            <p className="text-sm text-gray-500">Total Area: 5,169.00 square meter</p>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-6xl font-bold text-brand-600 mb-2">2025</div>
-              <div className="text-lg font-semibold text-gray-700">Target Completion</div>
+              <div className="text-6xl font-bold text-brand-600 mb-2">6</div>
+              <div className="text-lg font-semibold text-gray-700">Villas</div>
             </div>
             <div>
-              <div className="text-6xl font-bold text-brand-600 mb-2">120+</div>
-              <div className="text-lg font-semibold text-gray-700">Residential Units</div>
+              <div className="text-6xl font-bold text-brand-600 mb-2">2</div>
+              <div className="text-lg font-semibold text-gray-700">Apartment Buildings</div>
             </div>
             <div>
-              <div className="text-6xl font-bold text-brand-600 mb-2">2,500</div>
-              <div className="text-lg font-semibold text-gray-700">Sq Metres</div>
+              <div className="text-6xl font-bold text-brand-600 mb-2">5,169</div>
+              <div className="text-lg font-semibold text-gray-700">Sq Metres Total Area</div>
             </div>
             <div>
-              <div className="text-6xl font-bold text-brand-600 mb-2">150</div>
-              <div className="text-lg font-semibold text-gray-700">Parking Spaces</div>
+              <div className="text-6xl font-bold text-brand-600 mb-2">DELIVERED</div>
+              <div className="text-lg font-semibold text-gray-700">Project Status</div>
             </div>
           </div>
         </div>
@@ -230,22 +236,72 @@ export default function RealEstatePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {[
               {
-                title: "2 Bedroom Apartments",
+                title: "Villa Type A (DELIVERED)",
+                subtitle: "3 Villas",
                 image: "/background/5.png",
-                features: ["Modern Layout", "Open Kitchen", "Spacious Living", "2 Bathrooms"]
+                specs: "Average plot Area = 250 sqm, Building Type = G+1",
+                features: ["3 bedrooms with private bathroom", "Common bathroom", "Balcony", "Kitchen", "Service quarter with bed room", "Family room"]
               },
               {
-                title: "3 Bedroom Apartments",
+                title: "Villa Type B (DELIVERED)",
+                subtitle: "1 Villa",
                 image: "/background/8.png",
-                features: ["Family-Friendly", "Large Living Space", "Modern Design", "3 Bathrooms"]
+                specs: "Average plot Area = 250 sqm, Building Type = G+2",
+                features: ["3 bedrooms with private bathroom", "Common bathroom", "Balcony", "Terrace", "Office", "Family room", "Kitchen"]
               },
               {
-                title: "Premium Penthouses",
+                title: "Villa Type C (DELIVERED)",
+                subtitle: "2 Villas",
                 image: "/background/7.png",
-                features: ["Exclusive Access", "Panoramic Views", "Luxury Finishes", "Private Terrace"]
+                specs: "Average plot Area = 250 sqm, Building Type = G+2",
+                features: ["3 bedrooms with private bathroom", "Common bathroom", "Balcony", "Terrace", "Office", "Family room", "Kitchen"]
+              }
+            ].map((unit, index) => (
+              <div key={index} className="bg-gray-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="relative h-64">
+                  <Image
+                    src={unit.image}
+                    alt={unit.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{unit.title}</h3>
+                  <p className="text-brand-600 font-semibold mb-3">{unit.subtitle}</p>
+                  <p className="text-sm text-gray-600 mb-4">{unit.specs}</p>
+                  <ul className="space-y-2">
+                    {unit.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start text-gray-700 text-sm">
+                        <CheckCircle className="h-5 w-5 text-brand-600 mr-2 flex-shrink-0 mt-0.5" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Apartment Buildings */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            {[
+              {
+                title: "Apartment Building I (DELIVERED)",
+                subtitle: "G+4 with 2 wings - 5 apartments per floor per wing",
+                image: "/background/6.png",
+                specs: "Average plot Area = 650 sqm",
+                features: ["3 Bed Room units", "2 Bed Room units", "1 Bed Room units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas System", "Car Parking Area"]
+              },
+              {
+                title: "Apartment Building II (DELIVERED)",
+                subtitle: "G+4 with 2 wings - 7 apartments per floor per wing",
+                image: "/background/4.png",
+                specs: "Average plot Area = 870 sqm",
+                features: ["3 Bed Room units", "2 Bed Room units", "1 Bedroom units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas system", "Car Parking"]
               }
             ].map((unit, index) => (
               <div key={index} className="bg-gray-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">

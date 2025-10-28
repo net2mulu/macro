@@ -68,11 +68,32 @@ export default function AboutSection() {
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-              <p className="text-gray-600 leading-relaxed">
-                To provide domestic and international construction services through innovative 
-                and optimal utilization of state-of-the-art technologies in a quality-focused, 
-                result-oriented, financially sound, and socially and environmentally responsible manner.
+              <p className="text-gray-600 leading-relaxed mb-4">
+                To build enduring value through quality infrastructure, innovative construction inputs, 
+                and strategic real estate developments by:
               </p>
+              <ul className="space-y-2 text-gray-600">
+                <li className="flex items-start">
+                  <span className="text-brand-600 mr-2">✓</span>
+                  <span>Upholding professional integrity and engineering excellence in every project</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-brand-600 mr-2">✓</span>
+                  <span>Utilizing advanced technology and industry best practices</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-brand-600 mr-2">✓</span>
+                  <span>Developing reliable local supply chains for bitumen, aggregates, and asphalt</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-brand-600 mr-2">✓</span>
+                  <span>Creating strong partnerships with government, financiers, and global investors</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-brand-600 mr-2">✓</span>
+                  <span>Contributing to Ethiopia's transformation through real estate and PPPs</span>
+                </li>
+              </ul>
             </div>
           </motion.div>
 
@@ -95,14 +116,75 @@ export default function AboutSection() {
             <div className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-600 leading-relaxed">
-                Macro aims to establish itself as a competent and recognizable civil works 
-                general contractor in Ethiopia and beyond. We aim to turn the construction 
-                business into a commercial success and establish mutually beneficial 
-                long-term partnership relationships.
+                To stand among Africa's most trusted and diversified infrastructure and construction 
+                solution providers — delivering excellence in engineering, real estate, and industrial 
+                production while driving Ethiopia's sustainable development and regional competitiveness.
+              </p>
+              <p className="text-sm text-gray-500 mt-4 italic">
+                "Building Ethiopia's Foundation, Powering Its Future."
               </p>
             </div>
           </motion.div>
         </div>
+
+        {/* Core Values */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-16"
+        >
+          <h3 className="text-3xl font-bold text-gray-900 text-center mb-12">
+            Our <span className="text-brand-600">Core Values</span>
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: Award,
+                title: "Integrity",
+                description: "We deliver on our promises with honesty, fairness, and accountability"
+              },
+              {
+                icon: Shield,
+                title: "Excellence",
+                description: "Quality is our foundation; innovation is our drive"
+              },
+              {
+                icon: "Sustainability",
+                title: "Sustainability",
+                description: "We build responsibly for future generations"
+              },
+              {
+                icon: "Partnership",
+                title: "Partnership",
+                description: "We grow through collaboration, both locally and internationally"
+              },
+              {
+                icon: "Commitment",
+                title: "Commitment",
+                description: "Our people and our performance define our reliability"
+              },
+              {
+                icon: "Legacy",
+                title: "Legacy",
+                description: "Over 30 years of proven delivery, experience, and trust"
+              }
+            ].map((value, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
+              >
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{value.title}</h4>
+                <p className="text-gray-600">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Why Choose Us */}
         <motion.div

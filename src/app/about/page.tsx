@@ -90,25 +90,72 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Managing Director Message */}
+      <section className="py-20 bg-brand-600 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold mb-6 text-center">
+              Building Ethiopia's Foundation, Powering Its Future
+            </h2>
+            <h3 className="text-2xl font-semibold mb-8 text-center text-brand-200">
+              A Message from the Managing Director
+            </h3>
+            <div className="space-y-4 text-lg leading-relaxed">
+              <p>
+                <span className="font-semibold">Dear Valued Partners, Investors, and Stakeholders,</span>
+              </p>
+              <p>
+                It is with immense pride and a clear vision for the future that I present to you the profile of 
+                Macro General Contractor & Trading Plc.
+              </p>
+              <p>
+                For nearly three decades, since our inception in 1995, Macro has been a cornerstone of Ethiopia's 
+                infrastructure development. Our journey, paved with the successful completion of challenging road 
+                and bridge projects, has been guided by an unwavering commitment to quality, timely delivery, and integrity. 
+                We are grateful for the trust placed in us by the Ethiopian government and people, which has allowed us to 
+                become a recognized Grade One contractor.
+              </p>
+              <p>
+                This is why we are not just reflecting on our past achievements but are energetically building our future. 
+                We are strategically expanding our mission to embrace new horizons. Our foray into construction materials 
+                trading, our readiness for Public-Private Partnerships (PPPs) in housing, and our investment in crusher 
+                and batching plants are not mere diversifications; they are a strategic evolution.
+              </p>
+              <p>
+                We believe in partnership. We believe in growth through collaboration. We are actively seeking to build 
+                bridges with investors, technology providers, and international firms who share our vision for a developed 
+                and prosperous Ethiopia.
+              </p>
+              <p className="mt-6">
+                <span className="font-semibold">Sincerely,</span><br />
+                Ato Elias Mammo<br />
+                Managing Director
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Company History */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">Who We Are: A Legacy of Building Ethiopia</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  MACRO General Contractor & Trading PLC, also referred to as Macro, is a private limited 
-                  construction contracting and real-estate development firm established in November 1995.
+                  MACRO General Contractor & Trading PLC is a premier, privately-owned construction and 
+                  infrastructure development firm founded in November 1995. Registered as a Grade One Contractor 
+                  by the Ministry of Urban Development and Construction, we have spent nearly 30 years shaping 
+                  the landscape of Ethiopia through major road and bridge projects.
                 </p>
                 <p>
-                  Macro's main business is civil works contracting focusing on large infrastructure and building 
-                  contracts. Macro has been registered by the Ministry of Urban Development and Construction of 
-                  the Federal Democratic Republic of Ethiopia as a Grade I Road Contractor.
+                  Our reputation is built on a foundation of technical excellence, a highly skilled team, and a 
+                  fleet of modern equipment, enabling us to consistently deliver complex projects on time and to 
+                  the highest standards.
                 </p>
                 <p>
-                  For nearly three decades, we have been at the forefront of construction and infrastructure 
-                  development in Ethiopia, delivering projects with excellence and precision.
+                  From its strong core, Macro is now evolving into a diversified, integrated infrastructure solutions provider.
                 </p>
               </div>
             </div>

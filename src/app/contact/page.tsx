@@ -34,19 +34,19 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+251 114 710 591", "+251 911 202 814"],
+      details: ["+251 11 471 0591", "+251 11 419 8159", "+251 911 20 28 14 (MD)"],
       color: "text-blue-600"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["mail@macrogc.com"],
+      details: ["macrogc@gmail.com"],
       color: "text-green-600"
     },
     {
       icon: MapPin,
       title: "Address",
-      details: ["Nifas Silk Lafto Sub city", "Addis Ababa, Ethiopia"],
+      details: ["P.O.Box 122479", "Lafto Sub city, Addis Ababa", "Ethiopia"],
       color: "text-red-600"
     },
     {
@@ -252,16 +252,25 @@ export default function ContactPage() {
                 <h3 className="text-2xl font-bold mb-6">Additional Contact Details</h3>
                 <div className="space-y-4">
                   <div>
-                    <p className="font-semibold mb-2">Main Phone:</p>
-                    <p>+251 114 195 241</p>
+                    <p className="font-semibold mb-2">Telephone:</p>
+                    <p>+251 11 471 0591 / +251 11 419 8159</p>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Fax:</p>
-                    <p>+251 114 198 160</p>
+                    <p>+251 11 419 8160</p>
                   </div>
                   <div>
-                    <p className="font-semibold mb-2">Mobile:</p>
-                    <p>+251 911 202 814</p>
+                    <p className="font-semibold mb-2">Managing Director:</p>
+                    <p>Ato Elias Mammo</p>
+                    <p>Mobile: +251 911 20 28 14</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">Website:</p>
+                    <p>www.macrogc.com</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">Registration:</p>
+                    <p>14 November 1995, Addis Ababa</p>
                   </div>
                 </div>
               </div>
