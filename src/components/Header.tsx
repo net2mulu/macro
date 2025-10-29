@@ -1,19 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, Phone, Mail, MapPin } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showTopBar, setShowTopBar] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
-      setShowTopBar(window.scrollY < 50)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -30,31 +28,11 @@ export default function Header() {
 
   return (
     <>
-      {/* Top Contact Bar - Fixed */}
-      <div className={`fixed top-0 w-full bg-brand-600 text-white py-2 px-4 z-50 transition-transform duration-300 ${
-        showTopBar ? 'translate-y-0' : '-translate-y-full'
-      }`}>
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-sm">
-          <div className="flex items-center space-x-4 mb-2 sm:mb-0">
-            <div className="flex items-center space-x-2">
-              <Phone className="h-4 w-4" />
-              <span>+251 114 710 591</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="h-4 w-4" />
-              <span>mail@macrogc.com</span>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <MapPin className="h-4 w-4" />
-            <span>Nifas Silk Lafto Sub city, Addis Ababa</span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
-      <header className={`fixed w-full ${showTopBar ? 'top-14' : 'top-0'} z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      <header className={`fixed w-full top-0 z-40 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/30 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
       }`}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
@@ -102,7 +80,7 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden bg-white shadow-lg rounded-lg mt-2 py-4">
+            <div className="md:hidden bg-white/50 backdrop-blur-md shadow-lg rounded-lg mt-2 py-4">
               {navItems.map((item) => (
                 <Link
                   key={item.name}

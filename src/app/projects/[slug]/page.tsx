@@ -119,7 +119,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     .slice(0, 3)
 
   return (
-    <main className="min-h-screen pt-14">
+    <main className="min-h-screen">
       <Header />
       
       {/* Hero Section */}

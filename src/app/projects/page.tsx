@@ -128,7 +128,7 @@ export default function ProjectsPage() {
   const categories = ['All Projects', 'Road Construction', 'Real Estate Development', 'Infrastructure']
 
   return (
-    <main className="min-h-screen pt-14">
+    <main className="min-h-screen">
       <Header />
       
       {/* Hero Section */}

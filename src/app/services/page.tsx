@@ -11,42 +11,42 @@ export default function ServicesPage() {
       title: "Road & Building Construction",
       description: "Expert road and building construction services specializing in highways, bridges, infrastructure, and commercial buildings.",
       features: ["Road Construction & Rehabilitation", "Bridge Engineering", "Building Construction", "Earthworks", "Drainage Structures"],
-      image: "/background/1.png"
+      image: "/background/9.png"
     },
     {
       icon: MapPin,
       title: "Water Work Construction",
       description: "Specialized water infrastructure development including water supply systems, treatment facilities, and distribution networks.",
       features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations"],
-      image: "/background/2.png"
+      image: "/background/10.png"
     },
     {
       icon: Home,
       title: "Real Estate Development",
       description: "Creating sustainable and quality living spaces with innovative designs and compound facilities including villas and apartments.",
       features: ["Residential Villas", "Apartment Complexes", "Community Building", "Compound Facilities", "Design & Build"],
-      image: "/background/3.png"
+      image: "/background/11.png"
     },
     {
       icon: Zap,
       title: "Rental of Machines",
       description: "Comprehensive equipment rental services including excavators, graders, compactors, and construction machinery.",
       features: ["Excavators & Dozers", "Motor Graders", "Roller Compactors", "Asphalt Pavers", "Truck Mixers"],
-      image: "/background/4.png"
+      image: "/background/12.png"
     },
     {
       icon: Building2,
       title: "Retails of Construction Materials",
       description: "Retail supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
       features: ["Aggregates", "Concrete & Asphalt", "Building Materials", "Rebars & Steel", "Construction Supplies"],
-      image: "/background/5.png"
+      image: "/background/13.png"
     },
     {
       icon: Users,
       title: "Trading (Import & Export)",
       description: "Import and export of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
       features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Export Services"],
-      image: "/background/6.png"
+      image: "/background/14.png"
     }
   ]
 
@@ -58,7 +58,7 @@ export default function ServicesPage() {
   ]
 
   return (
-    <main className="min-h-screen pt-14">
+    <main className="min-h-screen">
       <Header />
       
       {/* Hero Section */}
