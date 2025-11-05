@@ -106,7 +106,7 @@ export default function AboutSection() {
           >
             <div className="relative h-48">
               <Image
-                src="/background/4.png"
+                src="/right/1.png"
                 alt="Our Vision"
                 fill
                 className="object-cover"

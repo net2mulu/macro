@@ -39,7 +39,7 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image 
-                src={isScrolled ? "/newLogo_black.png" : "/newLogo_white.png"} 
+                src={isScrolled ? "/black.png" : "/white.png"} 
                 alt="MACRO Logo" 
                 width={120} 
                 height={60}

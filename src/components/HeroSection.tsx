@@ -113,7 +113,7 @@ export default function HeroSection() {
           >
             <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
               <Image
-                src={`/background/${(currentImage % 6) + 2}.png`}
+                src={`/right/${((currentImage - 1) % 6) + 1}.png`}
                 alt="Construction project"
                 width={600}
                 height={400}

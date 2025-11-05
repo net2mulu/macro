@@ -55,7 +55,7 @@ export default function ProjectsPage() {
       date: '2023-2024',
       tags: ['Active', 'Corridor Development', '46% Progress'],
       category: 'Road Construction',
-      image: '/background/4.png',
+      image: '/right/1.png',
       status: 'Active'
     },
     {
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
       date: 'May 2017 - March 2023',
       tags: ['Completed', 'Road Construction', '81 km'],
       category: 'Road Construction',
-      image: '/background/2.png',
+      image: '/right/3.png',
       status: 'Completed'
     },
     {

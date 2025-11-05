@@ -70,7 +70,7 @@ export default function RealEstatePage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/background/1.png"
+            src="/right/4.png"
             alt="Real Estate Development"
             fill
             className="object-cover"
@@ -111,7 +111,7 @@ export default function RealEstatePage() {
             <div className="hidden lg:block">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8">
                 <Image
-                  src="/background/2.png"
+                  src="/right/4.png"
                   alt="Residential Development"
                   width={600}
                   height={400}
@@ -299,7 +299,7 @@ export default function RealEstatePage() {
               {
                 title: "Apartment Building II (DELIVERED)",
                 subtitle: "G+4 with 2 wings - 7 apartments per floor per wing",
-                image: "/background/4.png",
+                image: "/background/1.png",
                 specs: "Average plot Area = 870 sqm",
                 features: ["3 Bed Room units", "2 Bed Room units", "1 Bedroom units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas system", "Car Parking"]
               }
