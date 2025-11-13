@@ -201,6 +201,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     fill
                     className="object-cover"
                   />
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                 </div>
                 <div className="relative h-64 rounded-lg overflow-hidden">
                   <Image
@@ -209,6 +212,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     fill
                     className="object-cover"
                   />
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                 </div>
                 <div className="relative h-64 rounded-lg overflow-hidden">
                   <Image
@@ -217,6 +223,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     fill
                     className="object-cover"
                   />
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                 </div>
                 <div className="relative h-64 rounded-lg overflow-hidden">
                   <Image
@@ -225,6 +234,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                     fill
                     className="object-cover"
                   />
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                 </div>
               </div>
             </div>

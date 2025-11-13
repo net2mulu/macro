@@ -17,7 +17,7 @@ export default function ServicesSection() {
       icon: MapPin,
       title: "Water Work Construction",
       description: "Specialized water infrastructure development including water supply systems, treatment facilities, and distribution networks.",
-      features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations"],
+      features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations", "Irrigation Designing & Development"],
       image: "/background/10.png"
     },
     {
@@ -36,16 +36,16 @@ export default function ServicesSection() {
     },
     {
       icon: Building2,
-      title: "Retails of Construction Materials",
-      description: "Retail supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
+      title: "Construction Materials Production & Supply",
+      description: "Production and supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
       features: ["Aggregates", "Concrete & Asphalt", "Building Materials", "Rebars & Steel", "Construction Supplies"],
       image: "/background/13.png"
     },
     {
       icon: Users,
-      title: "Trading (Import & Export)",
-      description: "Import and export of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
-      features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Export Services"],
+      title: "Trading (Import & Wholesale)",
+      description: "Import and wholesale of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
+      features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Wholesale Services"],
       image: "/background/14.png"
     }
   ]
@@ -115,7 +115,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
-              <div className="relative h-48">
+              <div className="relative h-48 overflow-hidden">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -123,13 +123,15 @@ export default function ServicesSection() {
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/30"></div>
-                <div className="absolute top-4 left-4 bg-brand-600 text-white p-3 rounded-lg">
+                {/* Watermark cover overlays */}
+                <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
+                <div className="absolute top-4 left-4 bg-brand-600 text-white p-3 rounded-lg z-20">
                   <service.icon className="h-6 w-6" />
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{service.title}</h3>
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-gray-600">

@@ -28,6 +28,9 @@ export default function HeroSection() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/60 to-black/70"></div>
+        {/* Watermark cover overlays */}
+        <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
       </div>
 
       {/* Decorative Elements */}
@@ -52,8 +55,8 @@ export default function HeroSection() {
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight">
               <span className="block text-white drop-shadow-lg">Building</span>
-              <span className="block text-brand-400">Tomorrow</span>
-              <span className="block text-white">Today</span>
+              <span className="block text-brand-400">Excellence</span>
+              <span className="block text-white">Since 1995</span>
             </h1>
             
             <motion.p
@@ -112,13 +115,18 @@ export default function HeroSection() {
             className="relative hidden lg:block"
           >
             <div className="relative bg-white/10 backdrop-blur-sm rounded-2xl p-6 shadow-2xl">
-              <Image
-                src={`/right/${((currentImage - 1) % 6) + 1}.png`}
-                alt="Construction project"
-                width={600}
-                height={400}
-                className="rounded-xl shadow-2xl"
-              />
+              <div className="relative">
+                <Image
+                  src={`/right/${((currentImage - 1) % 6) + 1}.png`}
+                  alt="Construction project"
+                  width={600}
+                  height={400}
+                  className="rounded-xl shadow-2xl"
+                />
+                {/* Watermark cover overlays */}
+                <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-gray-900/95 via-gray-900/85 to-transparent rounded-br-xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-gray-900/95 via-gray-900/85 to-transparent rounded-bl-xl"></div>
+              </div>
             </div>
           </motion.div>
         </div>

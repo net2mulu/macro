@@ -204,8 +204,8 @@ export default function TestimonialSection() {
               <div className="text-sm text-brand-100">Completed Projects</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2">50+</div>
-              <div className="text-sm text-brand-100">Happy Clients</div>
+              <div className="text-4xl font-bold mb-2">10-15</div>
+              <div className="text-sm text-brand-100">Active Projects</div>
             </div>
             <div>
               <div className="text-4xl font-bold mb-2">100%</div>

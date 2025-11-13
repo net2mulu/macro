@@ -34,6 +34,12 @@ export default function ContactSection() {
       color: "text-blue-600"
     },
     {
+      icon: Phone,
+      title: "WhatsApp",
+      details: ["+251 911 202 814"],
+      color: "text-green-600"
+    },
+    {
       icon: Mail,
       title: "Email",
       details: ["mail@macrogc.com"],
@@ -48,7 +54,7 @@ export default function ContactSection() {
     {
       icon: Clock,
       title: "Business Hours",
-      details: ["Mon-Fri: 8:00 AM - 5:30 PM"],
+      details: ["Mon-Fri: 8:00 AM - 5:00 PM", "Saturday: 8:00 AM - 12:00 PM"],
       color: "text-purple-600"
     }
   ]

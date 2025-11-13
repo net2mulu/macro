@@ -38,9 +38,15 @@ export default function ContactPage() {
       color: "text-blue-600"
     },
     {
+      icon: Phone,
+      title: "WhatsApp",
+      details: ["+251 911 20 28 14"],
+      color: "text-green-600"
+    },
+    {
       icon: Mail,
       title: "Email",
-      details: ["macrogc@gmail.com"],
+      details: ["mail@macrogc.com"],
       color: "text-green-600"
     },
     {
@@ -52,25 +58,15 @@ export default function ContactPage() {
     {
       icon: Clock,
       title: "Business Hours",
-      details: ["Mon-Fri: 8:00 AM - 5:30 PM"],
+      details: ["Mon-Fri: 8:00 AM - 5:00 PM", "Saturday: 8:00 AM - 12:00 PM"],
       color: "text-purple-600"
     }
   ]
 
   const departments = [
     {
-      title: "General Inquiries",
-      description: "For general questions about our services",
-      contact: "mail@macrogc.com"
-    },
-    {
-      title: "Project Consultation",
-      description: "Schedule a consultation for your project",
-      contact: "+251 114 710 591"
-    },
-    {
-      title: "Real Estate",
-      description: "Inquiries about our real estate developments",
+      title: "General Information",
+      description: "For all inquiries and general information. Our team will route your concerns to the respective working units through our relationship/office manager.",
       contact: "mail@macrogc.com"
     }
   ]
@@ -92,6 +88,9 @@ export default function ContactPage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+          {/* Watermark cover overlays */}
+          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
         </div>
         
         {/* Content */}
@@ -131,8 +130,8 @@ export default function ContactPage() {
             ))}
           </div>
 
-          {/* Departments */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* General Contact */}
+          <div className="max-w-2xl mx-auto">
             {departments.map((dept, index) => (
               <div
                 key={index}
@@ -254,6 +253,10 @@ export default function ContactPage() {
                   <div>
                     <p className="font-semibold mb-2">Telephone:</p>
                     <p>+251 11 471 0591 / +251 11 419 8159</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">WhatsApp:</p>
+                    <p>+251 911 20 28 14</p>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Fax:</p>

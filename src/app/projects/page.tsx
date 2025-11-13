@@ -144,6 +144,9 @@ export default function ProjectsPage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+          {/* Watermark cover overlays */}
+          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
         </div>
         
         {/* Content */}
@@ -167,7 +170,7 @@ export default function ProjectsPage() {
               <div className="text-lg text-gray-700">Completed Projects</div>
             </div>
             <div>
-              <div className="text-5xl font-bold text-brand-600 mb-2">50+</div>
+              <div className="text-5xl font-bold text-brand-600 mb-2">10-15</div>
               <div className="text-lg text-gray-700">Active Projects</div>
             </div>
             <div>
@@ -205,7 +208,7 @@ export default function ProjectsPage() {
                 href={`/projects/${project.id}`}
                 className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
-                <div className="relative h-64">
+                <div className="relative h-64 overflow-hidden">
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -213,7 +216,10 @@ export default function ProjectsPage() {
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50"></div>
-                  <div className="absolute top-4 left-4">
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-28 h-14 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-28 h-14 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute top-4 left-4 z-20">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       project.status === 'Active' 
                         ? 'bg-brand-600 text-white' 
@@ -222,7 +228,7 @@ export default function ProjectsPage() {
                       {project.status}
                     </span>
                   </div>
-                  <div className="absolute bottom-4 left-4 text-white">
+                  <div className="absolute bottom-4 left-4 text-white z-20">
                     <div className="flex items-center gap-2 mb-2">
                       <MapPin className="h-4 w-4" />
                       <span className="text-sm">{project.category}</span>

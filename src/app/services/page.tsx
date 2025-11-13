@@ -17,7 +17,7 @@ export default function ServicesPage() {
       icon: MapPin,
       title: "Water Work Construction",
       description: "Specialized water infrastructure development including water supply systems, treatment facilities, and distribution networks.",
-      features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations"],
+      features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations", "Irrigation Designing & Development"],
       image: "/background/10.png"
     },
     {
@@ -36,16 +36,16 @@ export default function ServicesPage() {
     },
     {
       icon: Building2,
-      title: "Retails of Construction Materials",
-      description: "Retail supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
+      title: "Construction Materials Production & Supply",
+      description: "Production and supply of quality construction materials including aggregates, concrete, asphalt, and building supplies.",
       features: ["Aggregates", "Concrete & Asphalt", "Building Materials", "Rebars & Steel", "Construction Supplies"],
       image: "/background/13.png"
     },
     {
       icon: Users,
-      title: "Trading (Import & Export)",
-      description: "Import and export of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
-      features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Export Services"],
+      title: "Trading (Import & Wholesale)",
+      description: "Import and wholesale of critical construction materials including bitumen, reinforcement bars, oils, lubricants, and construction inputs.",
+      features: ["Bitumen Import", "Reinforcement Bars (Rebars)", "Oils & Lubricants", "Construction Materials", "Import & Wholesale Services"],
       image: "/background/14.png"
     }
   ]
@@ -74,6 +74,9 @@ export default function ServicesPage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+          {/* Watermark cover overlays */}
+          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
         </div>
         
         {/* Content */}
@@ -98,7 +101,7 @@ export default function ServicesPage() {
                 className="bg-gray-50 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Service Image */}
-                <div className="relative h-48">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.title}
@@ -106,8 +109,11 @@ export default function ServicesPage() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-black/40"></div>
+                  {/* Watermark cover overlays */}
+                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                   {/* Icon Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center z-20">
                     <div className="bg-white rounded-full p-4">
                       <service.icon className="h-12 w-12 text-brand-600" />
                     </div>
@@ -116,8 +122,7 @@ export default function ServicesPage() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{service.title}</h3>
                   
                   {/* Features */}
                   <ul className="space-y-2">

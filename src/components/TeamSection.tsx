@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { User, Mail, Phone } from 'lucide-react'
 
 export default function TeamSection() {
+  // Note: Future management structure will be: Board of Directors => CEO => Directors => Managers
   const teamMembers = [
     {
       name: "Ato Elias Mammo",
@@ -112,8 +113,8 @@ export default function TeamSection() {
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
                 <p className="text-brand-600 font-semibold mb-2">{member.position}</p>
                 <p className="text-gray-500 text-xs mb-2">{member.qualification}</p>
-                <p className="text-brand-500 text-xs mb-3">{member.experience} Experience</p>
-                <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
+                <p className="text-brand-500 text-xs">{member.experience} Experience</p>
+                {/* Note: Real project images should be incorporated, especially road projects */}
               </div>
             </motion.div>
           ))}
