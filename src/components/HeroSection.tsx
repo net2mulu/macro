@@ -54,8 +54,8 @@ export default function HeroSection() {
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-6 leading-tight">
-              <span className="block text-white drop-shadow-lg">Building</span>
-              <span className="block text-brand-400">Excellence</span>
+              <span className="block text-white drop-shadow-lg">Building </span>
+              <span className="block text-brand-400">the future</span>
               <span className="block text-white">Since 1995</span>
             </h1>
             
