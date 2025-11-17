@@ -21,7 +21,7 @@ export default function HeroSection() {
       {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0">
         <Image
-          src={`/background/${currentImage}.png`}
+          src={`/right/${((currentImage - 1) % 6) + 1}.png`}
           alt="Construction background"
           fill
           className="object-cover transition-opacity duration-1000"
