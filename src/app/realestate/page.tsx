@@ -78,9 +78,8 @@ export default function RealEstatePage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-          {/* Watermark cover overlays */}
-          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
+         
+         
         </div>
         
         {/* Content */}
@@ -113,13 +112,25 @@ export default function RealEstatePage() {
             </div>
             <div className="hidden lg:block">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-8">
-                <Image
-                  src="/right/4.png"
-                  alt="Residential Development"
-                  width={600}
-                  height={400}
-                  className="rounded-lg shadow-2xl"
-                />
+                <div className="relative">
+                  <Image
+                    src="/right/4.png"
+                    alt="Residential Development"
+                    width={600}
+                    height={400}
+                    className="rounded-lg shadow-2xl"
+                  />
+                  {/* Watermark cover logo - bottom right only */}
+                  <div className="absolute bottom-[-13px] right-[-13px] z-20">
+                    <Image
+                      src="/right/o.png"
+                      alt="MACRO Logo"
+                      width={85}
+                      height={60}
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -28,9 +28,7 @@ export default function HeroSection() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-gray-900/60 to-black/70"></div>
-        {/* Watermark cover overlays */}
-        <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
+       
       </div>
 
       {/* Decorative Elements */}
@@ -123,9 +121,16 @@ export default function HeroSection() {
                   height={400}
                   className="rounded-xl shadow-2xl"
                 />
-                {/* Watermark cover overlays */}
-                <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-gray-900/95 via-gray-900/85 to-transparent rounded-br-xl"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-gray-900/95 via-gray-900/85 to-transparent rounded-bl-xl"></div>
+                {/* Watermark cover logo - bottom right only */}
+                <div className="absolute bottom-[-13] right-[-13] z-20">
+                  <Image
+                    src="/right/o.png"
+                    alt="MACRO Logo"
+                    width={85}
+                    height={60}
+                    className="object-contain"
+                  />
+                </div>
               </div>
             </div>
           </motion.div>
