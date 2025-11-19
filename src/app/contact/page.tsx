@@ -35,31 +35,36 @@ export default function ContactPage() {
       icon: Phone,
       title: "Phone",
       details: ["+251 11 471 0591", "+251 11 419 8159", "+251 911 20 28 14 (MD)"],
-      color: "text-blue-600"
+      color: "text-blue-600",
+      links: ["tel:+251114710591", "tel:+251114198159", "tel:+251911202814"]
     },
     {
       icon: Phone,
       title: "WhatsApp",
       details: ["+251 911 20 28 14"],
-      color: "text-green-600"
+      color: "text-green-600",
+      links: ["https://wa.me/251911202814"]
     },
     {
       icon: Mail,
       title: "Email",
       details: ["mail@macrogc.com"],
-      color: "text-green-600"
+      color: "text-green-600",
+      links: ["mailto:mail@macrogc.com"]
     },
     {
       icon: MapPin,
       title: "Address",
       details: ["P.O.Box 122479", "Lafto Sub city, Addis Ababa", "Ethiopia"],
-      color: "text-red-600"
+      color: "text-red-600",
+      links: []
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: ["Mon-Fri: 8:00 AM - 5:00 PM", "Saturday: 8:00 AM - 12:00 PM"],
-      color: "text-purple-600"
+      color: "text-purple-600",
+      links: []
     }
   ]
 
@@ -121,9 +126,25 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
-                    {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-gray-600 text-sm">{detail}</p>
-                    ))}
+                    {info.details.map((detail, detailIndex) => {
+                      const link = info.links && info.links[detailIndex];
+                      if (link) {
+                        return (
+                          <a
+                            key={detailIndex}
+                            href={link}
+                            target={link.startsWith('http') ? '_blank' : undefined}
+                            rel={link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            className="text-gray-600 hover:text-brand-600 transition-colors text-sm block"
+                          >
+                            {detail}
+                          </a>
+                        );
+                      }
+                      return (
+                        <p key={detailIndex} className="text-gray-600 text-sm">{detail}</p>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -256,7 +277,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold mb-2">WhatsApp:</p>
-                    <p>+251 911 20 28 14</p>
+                    <a href="https://wa.me/251911202814" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      +251 911 20 28 14
+                    </a>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Fax:</p>
@@ -264,8 +287,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Managing Director:</p>
-                    <p>Ato Elias Mammo</p>
-                    <p>Mobile: +251 911 20 28 14</p>
+                    <p>Ato Elais Mamo</p>
+                    <p>Mobile: <a href="tel:+251911202814" className="hover:underline">+251 911 20 28 14</a></p>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Website:</p>

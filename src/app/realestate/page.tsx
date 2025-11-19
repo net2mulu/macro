@@ -307,14 +307,14 @@ export default function RealEstatePage() {
                 title: "Apartment Building I (DELIVERED)",
                 subtitle: "G+4 with 2 wings - 5 apartments per floor per wing",
                 image: "/background/6.png",
-                specs: "Average plot Area = 650 sqm",
+                specs: "Average plot Area = 650 sqm, Building Type = G+4",
                 features: ["3 Bed Room units", "2 Bed Room units", "1 Bed Room units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas System", "Car Parking Area"]
               },
               {
                 title: "Apartment Building II (DELIVERED)",
                 subtitle: "G+4 with 2 wings - 7 apartments per floor per wing",
                 image: "/background/1.png",
-                specs: "Average plot Area = 870 sqm",
+                specs: "Average plot Area = 870 sqm, Building Type = G+4",
                 features: ["3 Bed Room units", "2 Bed Room units", "1 Bedroom units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas system", "Car Parking"]
               }
             ].map((unit, index) => (

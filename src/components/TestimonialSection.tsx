@@ -10,28 +10,28 @@ export default function TestimonialSection() {
 
   const testimonials = [
     {
-      name: "Elias Mamo",
-      position: "Project Director",
-      company: "Ethiopian Roads Authority",
-      content: "MACRO has consistently delivered exceptional quality in all our construction projects. Their attention to detail and commitment to excellence sets them apart in the industry.",
-      rating: 5,
-      project: "Highway Construction Project"
+      type: "Recommendation Letter",
+      title: "Project Completion Certificate",
+      content: "This is to certify that MACRO General Contractor & Trading PLC has successfully completed the [Project Name] project in accordance with all specifications and requirements. The project was delivered on time and met all quality standards.",
+      project: "Road Construction Project",
+      date: "2024",
+      issuer: "Ethiopian Roads Authority"
     },
     {
-      name: "Samuel Kebede",
-      position: "Infrastructure Manager",
-      company: "Ministry of Urban Development",
-      content: "Working with MACRO has been a pleasure. Their team's professionalism and expertise in handling large infrastructure projects is unmatched.",
-      rating: 5,
-      project: "Infrastructure Development"
+      type: "Final Acceptance Letter",
+      title: "Project Acceptance Certificate",
+      content: "We hereby confirm that MACRO General Contractor & Trading PLC has completed the [Project Name] to our full satisfaction. All work has been inspected and approved. The project demonstrates excellent workmanship and adherence to all contractual obligations.",
+      project: "Infrastructure Development",
+      date: "2023",
+      issuer: "Ministry of Urban Development"
     },
     {
-      name: "Mekdes Tsegaye",
-      position: "Real Estate Developer",
-      company: "Premium Properties PLC",
-      content: "MACRO transformed our vision into reality. The quality of their work and their dedication to meeting deadlines made them our go-to construction partner.",
-      rating: 5,
-      project: "Commercial Complex Development"
+      type: "Recommendation Letter",
+      title: "Client Recommendation",
+      content: "MACRO General Contractor & Trading PLC has consistently demonstrated professionalism, quality workmanship, and timely project delivery. We highly recommend their services for construction and infrastructure projects.",
+      project: "Real Estate Development",
+      date: "2024",
+      issuer: "Client Reference"
     }
   ]
 
@@ -119,30 +119,37 @@ export default function TestimonialSection() {
                       <Quote className="h-10 w-10 text-brand-600 opacity-50" />
                     </div>
 
-                    {/* Rating Stars */}
-                    <div className="flex mb-4">
-                      {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                        <Star key={i} className="h-5 w-5 fill-brand-500 text-brand-500" />
-                      ))}
+                    {/* Type Badge */}
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 bg-brand-100 text-brand-700 rounded-full text-sm font-semibold">
+                        {testimonials[currentIndex].type}
+                      </span>
                     </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                      {testimonials[currentIndex].title}
+                    </h3>
 
                     {/* Testimonial Content */}
                     <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                      "{testimonials[currentIndex].content}"
+                      {testimonials[currentIndex].content}
                     </p>
 
                     {/* Project Info */}
                     <div className="border-t border-gray-200 pt-4">
                       <p className="text-sm text-gray-500 mb-2 font-semibold">
-                        {testimonials[currentIndex].project}
+                        Project: {testimonials[currentIndex].project}
+                      </p>
+                      <p className="text-sm text-gray-500 mb-2">
+                        Date: {testimonials[currentIndex].date}
                       </p>
                     </div>
 
-                    {/* Client Info */}
+                    {/* Issuer Info */}
                     <div className="mt-4">
-                      <p className="font-semibold text-gray-900">{testimonials[currentIndex].name}</p>
-                      <p className="text-sm text-gray-600">{testimonials[currentIndex].position}</p>
-                      <p className="text-sm text-brand-600">{testimonials[currentIndex].company}</p>
+                      <p className="font-semibold text-gray-900">Issued by:</p>
+                      <p className="text-sm text-brand-600">{testimonials[currentIndex].issuer}</p>
                     </div>
                   </div>
                 </div>

@@ -1,10 +1,14 @@
+'use client'
+
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Calendar, MapPin, Building, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 
 export default function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All Projects')
   const projects = [
     {
       id: 'warder-kebridehar-road',
@@ -127,6 +131,21 @@ export default function ProjectsPage() {
 
   const categories = ['All Projects', 'Road Construction', 'Real Estate Development', 'Infrastructure']
 
+  const filteredProjects = selectedCategory === 'All Projects' 
+    ? projects 
+    : projects.filter(project => {
+        if (selectedCategory === 'Road Construction') {
+          return project.category === 'Road Construction'
+        }
+        if (selectedCategory === 'Infrastructure') {
+          return project.category === 'Infrastructure'
+        }
+        if (selectedCategory === 'Real Estate Development') {
+          return project.category === 'Real Estate Development'
+        }
+        return true
+      })
+
   return (
     <main className="min-h-screen">
       <Header />
@@ -193,7 +212,12 @@ export default function ProjectsPage() {
             {categories.map((category) => (
               <button
                 key={category}
-                className="px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white"
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-brand-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white'
+                }`}
               >
                 {category}
               </button>
@@ -202,7 +226,7 @@ export default function ProjectsPage() {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.id}`}

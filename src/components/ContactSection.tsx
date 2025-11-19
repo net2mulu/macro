@@ -31,31 +31,36 @@ export default function ContactSection() {
       icon: Phone,
       title: "Phone",
       details: ["+251 114 710 591", "+251 911 202 814"],
-      color: "text-blue-600"
+      color: "text-blue-600",
+      links: ["tel:+251114710591", "tel:+251911202814"]
     },
     {
       icon: Phone,
       title: "WhatsApp",
       details: ["+251 911 202 814"],
-      color: "text-green-600"
+      color: "text-green-600",
+      links: ["https://wa.me/251911202814"]
     },
     {
       icon: Mail,
       title: "Email",
       details: ["mail@macrogc.com"],
-      color: "text-green-600"
+      color: "text-green-600",
+      links: ["mailto:mail@macrogc.com"]
     },
     {
       icon: MapPin,
       title: "Address",
       details: ["Nifas Silk Lafto Sub city", "Addis Ababa, Ethiopia"],
-      color: "text-red-600"
+      color: "text-red-600",
+      links: []
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: ["Mon-Fri: 8:00 AM - 5:00 PM", "Saturday: 8:00 AM - 12:00 PM"],
-      color: "text-purple-600"
+      color: "text-purple-600",
+      links: []
     }
   ]
 
@@ -103,9 +108,25 @@ export default function ContactSection() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
-                    {info.details.map((detail, detailIndex) => (
-                      <p key={detailIndex} className="text-gray-600">{detail}</p>
-                    ))}
+                    {info.details.map((detail, detailIndex) => {
+                      const link = info.links && info.links[detailIndex];
+                      if (link) {
+                        return (
+                          <a
+                            key={detailIndex}
+                            href={link}
+                            target={link.startsWith('http') ? '_blank' : undefined}
+                            rel={link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            className="text-gray-600 hover:text-brand-600 transition-colors block"
+                          >
+                            {detail}
+                          </a>
+                        );
+                      }
+                      return (
+                        <p key={detailIndex} className="text-gray-600">{detail}</p>
+                      );
+                    })}
                   </div>
                 </motion.div>
               ))}
