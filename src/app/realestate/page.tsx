@@ -305,16 +305,16 @@ export default function RealEstatePage() {
             {[
               {
                 title: "Apartment Building I (DELIVERED)",
-                subtitle: "G+4 with 2 wings - 5 apartments per floor per wing",
+                // subtitle: "G+4 with 2 wings - 5 apartments per floor per wing",
                 image: "/background/6.png",
-                specs: "Average plot Area = 650 sqm, Building Type = G+4",
+                specs: "Average plot Area = 650 square meter, Building Type = G+4 with 2 wings",
                 features: ["3 Bed Room units", "2 Bed Room units", "1 Bed Room units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas System", "Car Parking Area"]
               },
               {
                 title: "Apartment Building II (DELIVERED)",
-                subtitle: "G+4 with 2 wings - 7 apartments per floor per wing",
+                // subtitle: "G+4 with 2 wings - 7 apartments per floor per wing",
                 image: "/background/1.png",
-                specs: "Average plot Area = 870 sqm, Building Type = G+4",
+                specs: "Average plot Area = 870 square meter, Building Type = G+4 with 2 wings",
                 features: ["3 Bed Room units", "2 Bed Room units", "1 Bedroom units", "Studio units", "Each with kitchen", "Bedroom and living room", "Bathrooms", "Common Biogas system", "Car Parking"]
               }
             ].map((unit, index) => (
@@ -328,11 +328,12 @@ export default function RealEstatePage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{unit.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{unit.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{unit.specs}</p>
                   <ul className="space-y-2">
                     {unit.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-gray-700">
-                        <CheckCircle className="h-5 w-5 text-brand-600 mr-2 flex-shrink-0" />
+                      <li key={featureIndex} className="flex items-start text-gray-700 text-sm">
+                        <CheckCircle className="h-5 w-5 text-brand-600 mr-2 flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
                     ))}

@@ -126,6 +126,32 @@ export default function ProjectsPage() {
       category: 'Road Construction',
       image: '/background/8.png',
       status: 'Completed'
+    },
+    {
+      id: 'addis-commercial-tower',
+      title: 'Addis Commercial Tower',
+      description: 'Modern high-rise commercial complex in the heart of Addis Ababa featuring retail spaces, offices, and parking facilities.',
+      location: 'Addis Ababa, Nifas Silk Lafto Sub city',
+      client: 'Private Developer',
+      contract: '',
+      date: '2020',
+      tags: ['Completed', 'Commercial', 'Real Estate'],
+      category: 'Real Estate Development',
+      image: '/background/1.png',
+      status: 'Completed'
+    },
+    {
+      id: 'residential-complex-project',
+      title: 'Premium Residential Complex',
+      description: 'Luxury residential development with 120+ units, modern amenities, and premium finishes in prime location.',
+      location: 'Addis Ababa, Bole District',
+      client: 'Premium Properties PLC',
+      contract: '',
+      date: '2021',
+      tags: ['Active', 'Residential', 'Real Estate'],
+      category: 'Real Estate Development',
+      image: '/background/2.png',
+      status: 'Active'
     }
   ]
 

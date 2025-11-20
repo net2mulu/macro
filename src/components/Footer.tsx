@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Clock } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -52,13 +52,17 @@ export default function Footer() {
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-brand-500" />
                 <div>
-                  <p className="text-gray-300">+251 114 710 591</p>
-                  <p className="text-gray-300">+251 911 202 814</p>
+                  <a href="tel:+251114710591" className="text-gray-300 hover:text-brand-500 transition-colors block">+251 114 710 591</a>
+                  <a href="tel:+251911202814" className="text-gray-300 hover:text-brand-500 transition-colors block">+251 911 202 814</a>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-brand-500" />
-                <p className="text-gray-300">mail@macrogc.com</p>
+                <a href="mailto:mail@macrogc.com" className="text-gray-300 hover:text-brand-500 transition-colors">mail@macrogc.com</a>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MessageCircle className="h-5 w-5 text-brand-500" />
+                <a href="https://wa.me/251911202814" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-brand-500 transition-colors">+251 911 202 814</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Clock className="h-5 w-5 text-brand-500" />
