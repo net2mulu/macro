@@ -1,14 +1,10 @@
-'use client'
-
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Calendar, MapPin, Building, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All Projects')
   const projects = [
     {
       id: 'warder-kebridehar-road',
@@ -126,51 +122,10 @@ export default function ProjectsPage() {
       category: 'Road Construction',
       image: '/background/8.png',
       status: 'Completed'
-    },
-    {
-      id: 'addis-commercial-tower',
-      title: 'Addis Commercial Tower',
-      description: 'Modern high-rise commercial complex in the heart of Addis Ababa featuring retail spaces, offices, and parking facilities.',
-      location: 'Addis Ababa, Nifas Silk Lafto Sub city',
-      client: 'Private Developer',
-      contract: '',
-      date: '2020',
-      tags: ['Completed', 'Commercial', 'Real Estate'],
-      category: 'Real Estate Development',
-      image: '/background/1.png',
-      status: 'Completed'
-    },
-    {
-      id: 'residential-complex-project',
-      title: 'Premium Residential Complex',
-      description: 'Luxury residential development with 120+ units, modern amenities, and premium finishes in prime location.',
-      location: 'Addis Ababa, Bole District',
-      client: 'Premium Properties PLC',
-      contract: '',
-      date: '2021',
-      tags: ['Active', 'Residential', 'Real Estate'],
-      category: 'Real Estate Development',
-      image: '/background/2.png',
-      status: 'Active'
     }
   ]
 
   const categories = ['All Projects', 'Road Construction', 'Real Estate Development', 'Infrastructure']
-
-  const filteredProjects = selectedCategory === 'All Projects' 
-    ? projects 
-    : projects.filter(project => {
-        if (selectedCategory === 'Road Construction') {
-          return project.category === 'Road Construction'
-        }
-        if (selectedCategory === 'Infrastructure') {
-          return project.category === 'Infrastructure'
-        }
-        if (selectedCategory === 'Real Estate Development') {
-          return project.category === 'Real Estate Development'
-        }
-        return true
-      })
 
   return (
     <main className="min-h-screen">
@@ -238,12 +193,7 @@ export default function ProjectsPage() {
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-brand-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white'
-                }`}
+                className="px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white"
               >
                 {category}
               </button>
@@ -252,7 +202,7 @@ export default function ProjectsPage() {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {projects.map((project) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.id}`}

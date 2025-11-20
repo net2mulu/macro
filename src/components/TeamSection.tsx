@@ -15,6 +15,14 @@ export default function TeamSection() {
       description: "Leading MACRO with extensive experience in construction management and strategic planning."
     },
     {
+      name: "Ato Elais Mamo",
+      position: "Managing Director",
+      qualification: "B.Sc. Civil Engineering, Addis Ababa University",
+      experience: "25 years",
+      image: "/api/placeholder/300/300",
+      description: "Leading MACRO with extensive experience in construction management and strategic planning."
+    },
+    {
       name: "Ato Asamnew Asfaw",
       position: "Manager",
       qualification: "B.Sc. Civil Engineering, Addis Ababa University",
@@ -31,7 +39,7 @@ export default function TeamSection() {
       description: "Supporting management operations and coordinating with various project teams."
     },
     {
-      name: "Samuel Sultan Seid",
+      name: " Ato Samuel Sultan Seid",
       position: "Engineering Head",
       qualification: "B.Sc. Civil Engineering, Gonder University",
       experience: "7 years",

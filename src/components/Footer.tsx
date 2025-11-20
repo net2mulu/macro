@@ -21,7 +21,7 @@ export default function Footer() {
               contracting and real-estate development firm established in November 1995.
             </p>
             <p className="text-gray-300">
-              Grade I Road Contractor specializing in large infrastructure and building contracts.
+            General Contractors Road Contractor specializing in large infrastructure and building contracts.
             </p>
           </div>
 
