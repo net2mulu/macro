@@ -99,7 +99,7 @@ export default function HeroSection() {
                 <div className="text-sm text-gray-300">Projects Done</div>
               </div>
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-brand-400">Grade I</div>
+                <div className="text-3xl md:text-2xl font-bold text-brand-400">General Contractors</div>
                 <div className="text-sm text-gray-300">Certified</div>
               </div>
             </motion.div>

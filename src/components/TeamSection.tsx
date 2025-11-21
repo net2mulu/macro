@@ -15,10 +15,10 @@ export default function TeamSection() {
       description: "Leading MACRO with extensive experience in construction management and strategic planning."
     },
     {
-      name: "Ato Elais Mamo",
-      position: "Managing Director",
-      qualification: "B.Sc. Civil Engineering, Addis Ababa University",
-      experience: "25 years",
+      name: "Ato Yoseph Misganu",
+      position: "Manager",
+      qualification: "BA in Poletical Science & International relationships from AA university ",
+      experience: "Business founder & co-founder since 2019",
       image: "/api/placeholder/300/300",
       description: "Leading MACRO with extensive experience in construction management and strategic planning."
     },
