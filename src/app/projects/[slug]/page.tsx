@@ -207,6 +207,58 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     category: 'Road Construction',
     image: '/background/8.png',
     status: 'Completed'
+  },
+  'addis-residential-complex': {
+    id: 'addis-residential-complex',
+    title: 'Addis Ababa Residential Complex',
+    description: 'Modern residential complex featuring luxury apartments, commercial spaces, and recreational facilities in the heart of Addis Ababa.',
+    fullDescription: 'The Addis Ababa Residential Complex is a premier real estate development project located in the heart of Ethiopia\'s capital. This modern residential complex features luxury apartments with contemporary designs, integrated commercial spaces, and comprehensive recreational facilities. The project represents MACRO\'s commitment to delivering high-quality residential developments that meet the growing demand for modern living spaces in Addis Ababa. With state-of-the-art amenities and prime location, this complex offers residents an exceptional living experience.',
+    location: 'Addis Ababa',
+    client: 'Private Developer',
+    date: '2022-2025',
+    tags: ['Active', 'Residential', '85% Progress'],
+    category: 'Real Estate Development',
+    image: '/background/1.png',
+    status: 'Active'
+  },
+  'bishoftu-mixed-use': {
+    id: 'bishoftu-mixed-use',
+    title: 'Bishoftu Mixed-Use Development',
+    description: 'Integrated mixed-use development including residential units, shopping mall, office spaces, and hotel facilities.',
+    fullDescription: 'The Bishoftu Mixed-Use Development is a comprehensive real estate project that integrates multiple functions in a single development. This innovative project includes modern residential units, a shopping mall with retail spaces, commercial office buildings, and hotel facilities. Located in the rapidly developing city of Bishoftu, this mixed-use development creates a vibrant community hub that serves residents, businesses, and visitors. The project demonstrates MACRO\'s expertise in creating integrated developments that combine residential, commercial, and hospitality functions.',
+    location: 'Bishoftu',
+    client: 'Private Developer',
+    date: '2023-2026',
+    tags: ['Active', 'Mixed-Use', '45% Progress'],
+    category: 'Real Estate Development',
+    image: '/background/3.png',
+    status: 'Active'
+  },
+  'gondar-housing-project': {
+    id: 'gondar-housing-project',
+    title: 'Gondar Affordable Housing Project',
+    description: 'Large-scale affordable housing development project providing quality homes for middle-income families.',
+    fullDescription: 'The Gondar Affordable Housing Project is a large-scale residential development initiative designed to address the housing needs of middle-income families in Gondar. This project provides quality, affordable homes with modern amenities and infrastructure. The development includes well-planned residential units, community facilities, and supporting infrastructure. This project demonstrates MACRO\'s commitment to social responsibility by delivering quality housing solutions that are accessible to middle-income families, contributing to urban development and improving living standards in Gondar.',
+    location: 'Gondar',
+    client: 'Ministry of Urban Development',
+    date: '2021-2024',
+    tags: ['Active', 'Affordable Housing', '92% Progress'],
+    category: 'Real Estate Development',
+    image: '/right/1.png',
+    status: 'Active'
+  },
+  'hawassa-luxury-villas': {
+    id: 'hawassa-luxury-villas',
+    title: 'Hawassa Luxury Villas',
+    description: 'Exclusive gated community featuring luxury villas with modern amenities and lake views.',
+    fullDescription: 'The Hawassa Luxury Villas project is an exclusive gated community development featuring premium luxury villas with stunning lake views. Located in the beautiful city of Hawassa, this project offers residents an exceptional living experience with modern amenities, private spaces, and breathtaking natural surroundings. Each villa is designed with attention to detail, featuring high-quality finishes and contemporary architecture. The gated community provides security, privacy, and a sense of community, making it one of the most desirable residential developments in the region.',
+    location: 'Hawassa',
+    client: 'Private Developer',
+    date: 'March 2019 - August 2022',
+    tags: ['Completed', 'Luxury Housing', '50 Villas'],
+    category: 'Real Estate Development',
+    image: '/background/7.png',
+    status: 'Completed'
   }
 }
 

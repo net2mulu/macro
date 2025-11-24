@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useMemo } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Calendar, MapPin, Building, ArrowRight } from 'lucide-react'
@@ -5,6 +8,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All Projects')
+  
+  // Function to shuffle array randomly
+  const shuffleArray = <T,>(array: T[]): T[] => {
+    const shuffled = [...array]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    return shuffled
+  }
   const projects = [
     {
       id: 'warder-kebridehar-road',
@@ -122,10 +136,83 @@ export default function ProjectsPage() {
       category: 'Road Construction',
       image: '/background/8.png',
       status: 'Completed'
+    },
+    {
+      id: 'addis-residential-complex',
+      title: 'Addis Ababa Residential Complex',
+      description: 'Modern residential complex featuring luxury apartments, commercial spaces, and recreational facilities in the heart of Addis Ababa.',
+      location: 'Addis Ababa',
+      client: 'Private Developer',
+      contract: '2,500,000,000.00 ETB',
+      date: '2022-2025',
+      tags: ['Active', 'Residential', '85% Progress'],
+      category: 'Real Estate Development',
+      image: '/background/1.png',
+      status: 'Active'
+    },
+    {
+      id: 'bishoftu-mixed-use',
+      title: 'Bishoftu Mixed-Use Development',
+      description: 'Integrated mixed-use development including residential units, shopping mall, office spaces, and hotel facilities.',
+      location: 'Bishoftu',
+      client: 'Private Developer',
+      contract: '1,800,000,000.00 ETB',
+      date: '2023-2026',
+      tags: ['Active', 'Mixed-Use', '45% Progress'],
+      category: 'Real Estate Development',
+      image: '/background/3.png',
+      status: 'Active'
+    },
+    {
+      id: 'addis-commercial-tower',
+      title: 'Addis Commercial Tower',
+      description: 'High-rise commercial tower with office spaces, retail shops, and parking facilities in the central business district.',
+      location: 'Addis Ababa',
+      client: 'Private Developer',
+      contract: '1,200,000,000.00 ETB',
+      date: 'January 2020 - December 2023',
+      tags: ['Completed', 'Commercial', '25 Floors'],
+      category: 'Real Estate Development',
+      image: '/background/5.png',
+      status: 'Completed'
+    },
+    {
+      id: 'gondar-housing-project',
+      title: 'Gondar Affordable Housing Project',
+      description: 'Large-scale affordable housing development project providing quality homes for middle-income families.',
+      location: 'Gondar',
+      client: 'Ministry of Urban Development',
+      contract: '950,000,000.00 ETB',
+      date: '2021-2024',
+      tags: ['Active', 'Affordable Housing', '92% Progress'],
+      category: 'Real Estate Development',
+      image: '/right/1.png',
+      status: 'Active'
+    },
+    {
+      id: 'hawassa-luxury-villas',
+      title: 'Hawassa Luxury Villas',
+      description: 'Exclusive gated community featuring luxury villas with modern amenities and lake views.',
+      location: 'Hawassa',
+      client: 'Private Developer',
+      contract: '680,000,000.00 ETB',
+      date: 'March 2019 - August 2022',
+      tags: ['Completed', 'Luxury Housing', '50 Villas'],
+      category: 'Real Estate Development',
+      image: '/background/7.png',
+      status: 'Completed'
     }
   ]
 
   const categories = ['All Projects', 'Road Construction', 'Real Estate Development', 'Infrastructure']
+
+  // Filter projects based on selected category and randomize for "All Projects"
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === 'All Projects') {
+      return shuffleArray(projects)
+    }
+    return projects.filter(project => project.category === selectedCategory)
+  }, [selectedCategory])
 
   return (
     <main className="min-h-screen">
@@ -193,7 +280,12 @@ export default function ProjectsPage() {
             {categories.map((category) => (
               <button
                 key={category}
-                className="px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white"
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-brand-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white'
+                }`}
               >
                 {category}
               </button>
@@ -202,7 +294,7 @@ export default function ProjectsPage() {
 
           {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Link
                 key={project.id}
                 href={`/projects/${project.id}`}
