@@ -11,28 +11,28 @@ export default function ServicesPage() {
       title: "Road & Building Construction",
       description: "Expert road and building construction services specializing in highways, bridges, infrastructure, and commercial buildings.",
       features: ["Road Construction & Rehabilitation", "Bridge Engineering", "Building Construction", "Earthworks", "Drainage Structures"],
-      image: "/background/9.png"
+      image: "/WarderKebrideharRoadProject/Picture21.png"
     },
     {
       icon: MapPin,
       title: "Water Work Construction",
       description: "Specialized water infrastructure development including water supply systems, treatment facilities, and distribution networks.",
       features: ["Water Supply Systems", "Treatment Plants", "Distribution Networks", "Water Storage Facilities", "Pump Installations", "Irrigation Designing & Development"],
-      image: "/background/10.png"
+      image: "/beto/Picture13.png"
     },
     {
       icon: Home,
       title: "Real Estate Development",
       description: "Creating sustainable and quality living spaces with innovative designs and compound facilities including villas and apartments.",
       features: ["Residential Villas", "Apartment Complexes", "Community Building", "Compound Facilities", "Design & Build"],
-      image: "/background/11.png"
+      image: "/RealEstateApartment/picture5.pn"
     },
     {
       icon: Zap,
       title: "Rental of Machines",
       description: "Comprehensive equipment rental services including excavators, graders, compactors, and construction machinery.",
       features: ["Excavators & Dozers", "Motor Graders", "Roller Compactors", "Asphalt Pavers", "Truck Mixers"],
-      image: "/background/12.png"
+      image: "/BurayuSub-CityCorridor/picOne.jpg"
     },
     {
       icon: Building2,
@@ -66,7 +66,7 @@ export default function ServicesPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/right/2.png"
+            src="/BurayuSub-CityCorridor/picThree.jpg"
             alt="Construction background"
             fill
             className="object-cover"
@@ -74,9 +74,6 @@ export default function ServicesPage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-          {/* Watermark cover overlays */}
-          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
         </div>
         
         {/* Content */}
@@ -109,9 +106,6 @@ export default function ServicesPage() {
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-black/40"></div>
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                   {/* Icon Overlay */}
                   <div className="absolute inset-0 flex items-center justify-center z-20">
                     <div className="bg-white rounded-full p-4">

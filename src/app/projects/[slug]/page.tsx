@@ -19,6 +19,7 @@ interface ProjectDetail {
   status: string
   startingPoint?: string
   endingPoint?: string
+  gridImages?: string[]
 }
 
 const projectDetails: { [key: string]: ProjectDetail } = {
@@ -47,10 +48,11 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     date: 'February 22, 2018',
     tags: ['Active Projects', 'Road Construction', 'Regional Connectivity'],
     category: 'Road Construction',
-    image: '/projects/warder kebridehar road project.jpg',
+    image: '/WarderKebrideharRoadProject/picFour.png',
     status: 'Active',
     startingPoint: 'Kebridehar town as a junction to the main road from Jiggiga to Gode in Qurhey Zone',
-    endingPoint: 'Warder, Dollo zone'
+    endingPoint: 'Warder, Dollo zone',
+    gridImages: ['/WarderKebrideharRoadProject/Picture21.png', '/WarderKebrideharRoadProject/picOne.jpg', '/WarderKebrideharRoadProject/picTwo.jpg', '/WarderKebrideharRoadProject/picFour.png']
   },
   'addis-commercial-tower': {
     id: 'addis-commercial-tower',
@@ -63,7 +65,8 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     tags: ['Completed', 'Commercial', 'Real Estate'],
     category: 'Real Estate Development',
     image: '/background/1.png',
-    status: 'Completed'
+    status: 'Completed',
+    gridImages: ['/background/1.png', '/background/2.png', '/background/3.png', '/background/4.png']
   },
   'residential-complex-project': {
     id: 'residential-complex-project',
@@ -127,8 +130,9 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     date: '2023-2024',
     tags: ['Active', 'Corridor Development', '90% Progress'],
     category: 'Road Construction',
-    image: '/background/1.png',
-    status: 'Active'
+    image: '/Bishoftu/picture2.jpg',
+    status: 'Active',
+    gridImages: ['/Bishoftu/picture1.jpg', '/Bishoftu/picture2.jpg', '/Bishoftu/Picture3.png', '/Bishoftu/picture1.jpg']
   },
   'shaggar-city': {
     id: 'shaggar-city',
@@ -153,8 +157,9 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     date: 'May 2017 - March 2023',
     tags: ['Completed', 'Road Construction', '81 km'],
     category: 'Road Construction',
-    image: '/right/3.png',
-    status: 'Completed'
+    image: '/FikHameroimiRoadProject/Picture23.png',
+    status: 'Completed',
+    gridImages: ['/FikHameroImiRoadProject/Picture12.png', '/FikHameroImiRoadProject/Picture23.png']
   },
   'ayat-roundabout': {
     id: 'ayat-roundabout',
@@ -179,7 +184,7 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     date: 'October 2014 - July 2021',
     tags: ['Completed', 'Bridge Construction'],
     category: 'Infrastructure',
-    image: '/background/6.png',
+    image: '/CMCMichaelOverpassBridge/Picture11.png',
     status: 'Completed'
   },
   'hargale-dolobay': {
@@ -231,7 +236,7 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     date: '2023-2026',
     tags: ['Active', 'Mixed-Use', '45% Progress'],
     category: 'Real Estate Development',
-    image: '/background/3.png',
+    image: '/Bishoftu/picture3.jpg',
     status: 'Active'
   },
   'gondar-housing-project': {
@@ -350,50 +355,16 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
               {/* Project Images */}
               <div className="grid grid-cols-2 gap-4 mb-12">
-                <div className="relative h-64 rounded-lg overflow-hidden">
-                  <Image
-                    src="/background/1.png"
-                    alt="Project construction"
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
-                </div>
-                <div className="relative h-64 rounded-lg overflow-hidden">
-                  <Image
-                    src="/background/2.png"
-                    alt="Project progress"
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
-                </div>
-                <div className="relative h-64 rounded-lg overflow-hidden">
-                  <Image
-                    src="/background/3.png"
-                    alt="Infrastructure"
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
-                </div>
-                <div className="relative h-64 rounded-lg overflow-hidden">
-                  <Image
-                    src="/background/4.png"
-                    alt="Completed section"
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
-                </div>
+                {(project.gridImages || ['/background/1.png', '/background/2.png', '/background/3.png', '/background/4.png']).map((imgSrc, imgIndex) => (
+                  <div key={imgIndex} className="relative h-64 rounded-lg overflow-hidden">
+                    <Image
+                      src={imgSrc}
+                      alt={`${project.title} - Image ${imgIndex + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 

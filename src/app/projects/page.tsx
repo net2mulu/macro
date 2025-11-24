@@ -30,7 +30,7 @@ export default function ProjectsPage() {
       date: '2020-2024',
       tags: ['Active', 'Road Construction', '70% Progress'],
       category: 'Road Construction',
-      image: '/projects/warder kebridehar road project.jpg',
+      image: '/WarderKebrideharRoadProject/Picture21.png',
       status: 'Active'
     },
     {
@@ -56,7 +56,7 @@ export default function ProjectsPage() {
       date: '2023-2024',
       tags: ['Active', 'Corridor Development', '90% Progress'],
       category: 'Road Construction',
-      image: '/background/1.png',
+      image: '/Bishoftu/picture1.jpg',
       status: 'Active'
     },
     {
@@ -108,7 +108,7 @@ export default function ProjectsPage() {
       date: 'October 2014 - July 2021',
       tags: ['Completed', 'Bridge Construction'],
       category: 'Infrastructure',
-      image: '/background/6.png',
+      image: '/CMCMichaelOverpassBridge/Picture11.png',
       status: 'Completed'
     },
     {
@@ -223,7 +223,7 @@ export default function ProjectsPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/background/5.png"
+            src="/Bishoftu/picture2.jpg"
             alt="Our Projects"
             fill
             className="object-cover"
@@ -231,9 +231,6 @@ export default function ProjectsPage() {
           />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-          {/* Watermark cover overlays */}
-          <div className="absolute bottom-0 right-0 w-32 h-16 bg-gradient-to-tl from-black/90 via-black/80 to-transparent z-10"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-16 bg-gradient-to-tr from-black/90 via-black/80 to-transparent z-10"></div>
         </div>
         
         {/* Content */}
@@ -308,9 +305,6 @@ export default function ProjectsPage() {
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50"></div>
-                  {/* Watermark cover overlays */}
-                  <div className="absolute bottom-0 right-0 w-28 h-14 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                  <div className="absolute bottom-0 left-0 w-28 h-14 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                   <div className="absolute top-4 left-4 z-20">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                       project.status === 'Active' 

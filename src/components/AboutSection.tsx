@@ -59,7 +59,7 @@ export default function AboutSection() {
           >
             <div className="relative h-48">
               <Image
-                src="/background/3.png"
+                src="/WarderKebrideharRoadProject/picOne.jpg"
                 alt="Our Mission"
                 fill
                 className="object-cover"
@@ -106,15 +106,12 @@ export default function AboutSection() {
           >
             <div className="relative h-48 overflow-hidden">
               <Image
-                src="/right/1.png"
+                src="/WarderKebrideharRoadProject/picTwo.jpg"
                 alt="Our Vision"
                 fill
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-black/40"></div>
-              {/* Watermark cover overlays */}
-              <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>

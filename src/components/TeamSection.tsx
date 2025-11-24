@@ -7,7 +7,7 @@ export default function TeamSection() {
   // Note: Future management structure will be: Board of Directors => CEO => Directors => Managers
   const teamMembers = [
     {
-      name: "Ato Elais Mamo",
+      name: "Ato Elias Mammo",
       position: "Managing Director",
       qualification: "B.Sc. Civil Engineering, Addis Ababa University",
       experience: "25 years",

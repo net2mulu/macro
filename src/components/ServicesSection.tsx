@@ -11,7 +11,7 @@ export default function ServicesSection() {
       title: "Road & Building Construction",
       description: "Expert road and building construction services specializing in highways, bridges, infrastructure, and commercial buildings.",
       features: ["Road Construction & Rehabilitation", "Bridge Engineering", "Building Construction", "Earthworks", "Drainage Structures"],
-      image: "/background/9.png"
+      image: "/WarderKebrideharRoadProject/Picture21.png"
     },
     {
       icon: MapPin,
@@ -25,14 +25,14 @@ export default function ServicesSection() {
       title: "Real Estate Development",
       description: "Creating sustainable and quality living spaces with innovative designs and compound facilities including villas and apartments.",
       features: ["Residential Villas", "Apartment Complexes", "Community Building", "Compound Facilities", "Design & Build"],
-      image: "/background/11.png"
+      image: "/RealEstateApartment/picture5.png"
     },
     {
       icon: Zap,
       title: "Rental of Machines",
       description: "Comprehensive equipment rental services including excavators, graders, compactors, and construction machinery.",
       features: ["Excavators & Dozers", "Motor Graders", "Roller Compactors", "Asphalt Pavers", "Truck Mixers"],
-      image: "/background/12.png"
+      image: "/BurayuSub-CityCorridor/picOne.jpg"
     },
     {
       icon: Building2,
@@ -123,9 +123,6 @@ export default function ServicesSection() {
                   className="object-cover transition-transform duration-300 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/30"></div>
-                {/* Watermark cover overlays */}
-                <div className="absolute bottom-0 right-0 w-24 h-12 bg-gradient-to-tl from-black/95 via-black/90 to-transparent z-10"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-12 bg-gradient-to-tr from-black/95 via-black/90 to-transparent z-10"></div>
                 <div className="absolute top-4 left-4 bg-brand-600 text-white p-3 rounded-lg z-20">
                   <service.icon className="h-6 w-6" />
                 </div>
