@@ -1,85 +1,88 @@
-'use client'
+"use client";
 
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from 'lucide-react'
-import Image from 'next/image'
-import { useState } from 'react'
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission here
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-  }
+    console.log("Form submitted:", formData);
+    alert("Thank you for your message! We will get back to you soon.");
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+  };
 
   const contactInfo = [
     {
       icon: Phone,
       title: "Phone",
-      details: ["+251 11 471 0591", "+251 11 419 8159", "+251 911 20 28 14 (MD)"],
+      details: ["+251 11 471 0591", "+251 911 20 28 14 (MD)"],
       color: "text-blue-600",
-      links: ["tel:+251114710591", "tel:+251114198159", "tel:+251911202814"]
+      links: ["tel:+251114710591", "tel:+251911202814"],
     },
     {
       icon: Phone,
       title: "WhatsApp",
       details: ["+251 911 20 28 14"],
       color: "text-green-600",
-      links: ["https://wa.me/251911202814"]
+      links: ["https://wa.me/251911202814"],
     },
     {
       icon: Mail,
       title: "Email",
       details: ["mail@macrogc.com"],
       color: "text-green-600",
-      links: ["mailto:mail@macrogc.com"]
+      links: ["mailto:mail@macrogc.com"],
     },
     {
       icon: MapPin,
       title: "Address",
       details: ["P.O.Box 122479", "Lafto Sub city, Addis Ababa", "Ethiopia"],
       color: "text-red-600",
-      links: []
+      links: [],
     },
     {
       icon: Clock,
       title: "Business Hours",
       details: ["Mon-Fri: 8:00 AM - 5:00 PM", "Saturday: 8:00 AM - 12:00 PM"],
       color: "text-purple-600",
-      links: []
-    }
-  ]
+      links: [],
+    },
+  ];
 
   const departments = [
     {
       title: "General Information",
-      description: "For all inquiries and general information. Our team will route your concerns to the respective working units through our relationship/office manager.",
-      contact: "mail@macrogc.com"
-    }
-  ]
+      description:
+        "For all inquiries and general information. Our team will route your concerns to the respective working units through our relationship/office manager.",
+      contact: "mail@macrogc.com",
+    },
+  ];
 
   return (
     <main className="min-h-screen">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative text-white py-24 overflow-hidden">
         {/* Background Image */}
@@ -94,7 +97,7 @@ export default function ContactPage() {
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
         </div>
-        
+
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
@@ -102,8 +105,8 @@ export default function ContactPage() {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Get In Touch</h1>
           <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto drop-shadow-lg">
-            Ready to start your next construction project? Contact us today for a consultation 
-            and let us help bring your vision to life.
+            Ready to start your next construction project? Contact us today for
+            a consultation and let us help bring your vision to life.
           </p>
         </div>
       </section>
@@ -122,7 +125,9 @@ export default function ContactPage() {
                     <info.icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
+                    <h4 className="font-semibold text-gray-900 mb-1">
+                      {info.title}
+                    </h4>
                     {info.details.map((detail, detailIndex) => {
                       const link = info.links && info.links[detailIndex];
                       if (link) {
@@ -130,8 +135,14 @@ export default function ContactPage() {
                           <a
                             key={detailIndex}
                             href={link}
-                            target={link.startsWith('http') ? '_blank' : undefined}
-                            rel={link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                            target={
+                              link.startsWith("http") ? "_blank" : undefined
+                            }
+                            rel={
+                              link.startsWith("http")
+                                ? "noopener noreferrer"
+                                : undefined
+                            }
                             className="text-gray-600 hover:text-brand-600 transition-colors text-sm block"
                           >
                             {detail}
@@ -139,7 +150,9 @@ export default function ContactPage() {
                         );
                       }
                       return (
-                        <p key={detailIndex} className="text-gray-600 text-sm">{detail}</p>
+                        <p key={detailIndex} className="text-gray-600 text-sm">
+                          {detail}
+                        </p>
                       );
                     })}
                   </div>
@@ -155,7 +168,9 @@ export default function ContactPage() {
                 key={index}
                 className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border-t-4 border-brand-600"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{dept.title}</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {dept.title}
+                </h3>
                 <p className="text-gray-600 mb-4">{dept.description}</p>
                 <p className="text-brand-600 font-semibold">{dept.contact}</p>
               </div>
@@ -170,11 +185,16 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
             <div className="bg-gray-50 p-8 rounded-lg">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Send us a Message</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                Send us a Message
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Full Name *
                     </label>
                     <input
@@ -189,7 +209,10 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Email Address *
                     </label>
                     <input
@@ -204,10 +227,13 @@ export default function ContactPage() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Phone Number
                     </label>
                     <input
@@ -221,7 +247,10 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Subject *
                     </label>
                     <input
@@ -238,7 +267,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Message *
                   </label>
                   <textarea
@@ -266,15 +298,22 @@ export default function ContactPage() {
             {/* Map & Additional Info */}
             <div>
               <div className="bg-brand-600 text-white p-8 rounded-lg mb-6">
-                <h3 className="text-2xl font-bold mb-6">Additional Contact Details</h3>
+                <h3 className="text-2xl font-bold mb-6">
+                  Additional Contact Details
+                </h3>
                 <div className="space-y-4">
                   <div>
                     <p className="font-semibold mb-2">Telephone:</p>
-                    <p>+251 11 471 0591 / +251 11 419 8159</p>
+                    <p>+251 11 471 0591</p>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">WhatsApp:</p>
-                    <a href="https://wa.me/251911202814" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    <a
+                      href="https://wa.me/251911202814"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
                       +251 911 20 28 14
                     </a>
                   </div>
@@ -285,7 +324,12 @@ export default function ContactPage() {
                   <div>
                     <p className="font-semibold mb-2">Managing Director:</p>
                     <p>Ato Elias Mammo</p>
-                    <p>Mobile: <a href="tel:+251911202814" className="hover:underline">+251 911 20 28 14</a></p>
+                    <p>
+                      Mobile:{" "}
+                      <a href="tel:+251911202814" className="hover:underline">
+                        +251 911 20 28 14
+                      </a>
+                    </p>
                   </div>
                   <div>
                     <p className="font-semibold mb-2">Website:</p>
@@ -299,27 +343,40 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-gray-50 p-8 rounded-lg">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Choose MACRO?</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  Why Choose MACRO?
+                </h3>
                 <ul className="space-y-3">
                   <li className="flex items-start">
                     <span className="text-brand-600 mr-2">✓</span>
-                    <span className="text-gray-700">Grade I Road Contractor certified by Ministry of Urban Development</span>
+                    <span className="text-gray-700">
+                      Grade I Road Contractor certified by Ministry of Urban
+                      Development
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-brand-600 mr-2">✓</span>
-                    <span className="text-gray-700">30+ years of experience in construction and real estate</span>
+                    <span className="text-gray-700">
+                      30+ years of experience in construction and real estate
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-brand-600 mr-2">✓</span>
-                    <span className="text-gray-700">200+ successfully completed projects</span>
+                    <span className="text-gray-700">
+                      200+ successfully completed projects
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-brand-600 mr-2">✓</span>
-                    <span className="text-gray-700">Comprehensive services from planning to completion</span>
+                    <span className="text-gray-700">
+                      Comprehensive services from planning to completion
+                    </span>
                   </li>
                   <li className="flex items-start">
                     <span className="text-brand-600 mr-2">✓</span>
-                    <span className="text-gray-700">Dedicated to quality, safety, and customer satisfaction</span>
+                    <span className="text-gray-700">
+                      Dedicated to quality, safety, and customer satisfaction
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -330,5 +387,5 @@ export default function ContactPage() {
 
       <Footer />
     </main>
-  )
+  );
 }
