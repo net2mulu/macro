@@ -118,7 +118,8 @@ const projectDetails: { [key: string]: ProjectDetail } = {
     tags: ['Active', 'Road Construction', '28% Progress'],
     category: 'Road Construction',
     image: '/background/3.png',
-    status: 'Active'
+    status: 'Active',
+    gridImages: ['/SegegGerbo/Picture19.png', '/SegegGerbo/Picture20.png', '/SegegGerbo/picture21.jpg', '/SegegGerbo/Picture19.png']
   },
   'bishoftu-corridor': {
     id: 'bishoftu-corridor',

@@ -1,0 +1,48 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
+import { fetchProjects, fetchProjectBySlug, transformProject } from '@/lib/strapi'
+
+export interface Project {
+  id: string
+  title: string
+  description: string
+  fullDescription: string
+  location: string
+  client: string
+  date: string
+  tags: string[]
+  category: string
+  image: string
+  status: string
+  startingPoint?: string
+  endingPoint?: string
+  gridImages?: string[]
+  contract?: string
+}
+
+export function useProjects() {
+  return useQuery({
+    queryKey: ['projects'],
+    queryFn: async () => {
+      const response = await fetchProjects()
+      return response.data.map(transformProject) as Project[]
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    refetchOnWindowFocus: false,
+  })
+}
+
+export function useProjectBySlug(slug: string) {
+  return useQuery({
+    queryKey: ['project', slug],
+    queryFn: async () => {
+      const response = await fetchProjectBySlug(slug)
+      return transformProject(response.data) as Project
+    },
+    enabled: !!slug,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  })
+}
+
