@@ -208,8 +208,7 @@ export default function TeamSection() {
   // --- 1. FETCH DATA using React Query ---
   const { data: teamMembers = [], isLoading, error } = useQuery<TeamMember[]>({
     queryKey: ['teamMembers'], 
-    queryFn: fetchTeamMembers, // Calls the Strapi API client
-    // Set a placeholder array [] for default value during initial loading
+    queryFn: fetchTeamMembers, 
   })
 
   // --- 2. LOADING STATE ---

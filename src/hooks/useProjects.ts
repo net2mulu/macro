@@ -1,9 +1,10 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import { fetchProjects, fetchProjectBySlug, transformProject } from '@/lib/strapi'
+import { fetchProjects, fetchProjectBySlug, transformProject, fetchCategories } from '@/lib/strapi'
 
 export interface Project {
+  slug?: string
   id: string
   title: string
   description: string
@@ -41,6 +42,22 @@ export function useProjectBySlug(slug: string) {
       return transformProject(response.data) as Project
     },
     enabled: !!slug,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  })
+}
+
+export function useCategories() {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const response = await fetchCategories()
+      return response.data.map((c) => ({
+        id: c.documentId || c.id?.toString?.() || '',
+        name: c.attributes?.name || c.name || '',
+        slug: c.attributes?.slug || c.slug || '',
+      }))
+    },
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   })

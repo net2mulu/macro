@@ -1,339 +1,123 @@
+// app/projects/[slug]/page.tsx
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Calendar, MapPin, Building, ArrowLeft, User, Clock } from 'lucide-react'
+import { MapPin, ArrowLeft, User, Clock } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { fetchProjectBySlug, fetchAllProjects } from '@/lib/strapi-fetch'
+import { ProjectDetail, BaseProject, StrapiContentBlock } from '@/lib/interfaces'
 
-interface ProjectDetail {
-  id: string
-  title: string
-  description: string
-  fullDescription: string
-  location: string
-  client: string
-  date: string
-  tags: string[]
-  category: string
-  image: string
-  status: string
-  startingPoint?: string
-  endingPoint?: string
-  gridImages?: string[]
-}
+/**
+ * Helper function to extract and format text from Strapi's Rich Text (Lexical/Blocks) structure.
+ * @param fullDescription - The raw rich text data from Strapi.
+ * @returns A clean string suitable for rendering in a <p> tag.
+ */
+function extractText(fullDescription: unknown): string {
+  if (!fullDescription) return ''
 
-const projectDetails: { [key: string]: ProjectDetail } = {
-  'adaba-angetu-road': {
-    id: 'adaba-angetu-road',
-    title: 'Adaba Angetu Road Project',
-    description: 'A major road construction project connecting Adaba Town in West Arsi Zone to Angetu Town in Bale Zone, Oromiya Region.',
-    fullDescription: 'The Adaba Angetu Road Project is a critical infrastructure development linking two important towns in the Oromiya Region. This project encompasses the construction of a modern road network designed to improve connectivity, facilitate trade, and enhance transportation efficiency in the region. The road serves as a vital transportation corridor for local communities, agricultural products, and regional commerce.',
-    location: 'Oromiya Region, West Arsi & Bale Zones',
-    client: 'Ethiopian Roads Authority',
-    date: 'February 22, 2018',
-    tags: ['Active Projects', 'Road Construction', 'Infrastructure'],
-    category: 'Road Construction',
-    image: '/projects/Adaba Angetu Road project.jpg',
-    status: 'Active',
-    startingPoint: 'Adaba Town located in Oromiya Region, West Arsi Zone at approximately 7000\' Latitude and 39023\' Longitude.',
-    endingPoint: 'Angetu Town located in Oromiya Region, Bale Zone at approximately 6024\' Latitude and 390 35\' Longitude.'
-  },
-  'warder-kebridehar-road': {
-    id: 'warder-kebridehar-road',
-    title: 'Warder Kebridehar Road Project',
-    description: 'Road construction project connecting Kebridehar to Warder through multiple zones in the Somali Regional State.',
-    fullDescription: 'The Warder-Kebridehar Road Project is a significant infrastructure initiative that connects two zones in the Somali Regional State, facilitating regional connectivity and economic development. The project road starts at Kebridehar as a junction to the left from the main paved road from Jiggiga to Gode, which is 410 km away from Jiggiga town and 1010 km away from Addis Ababa. The road passes through multiple kebeles including Elhar, Tondehelay, Kudunbur, Berchesale (Eyobe), Esmude, Harragubewafeduke, Huletage, culminating at Warder.',
-    location: 'Somali Regional State, Qurhaeye & Dollo Zones',
-    client: 'Ethiopian Roads Authority',
-    date: 'February 22, 2018',
-    tags: ['Active Projects', 'Road Construction', 'Regional Connectivity'],
-    category: 'Road Construction',
-    image: '/WarderKebrideharRoadProject/picFour.png',
-    status: 'Active',
-    startingPoint: 'Kebridehar town as a junction to the main road from Jiggiga to Gode in Qurhey Zone',
-    endingPoint: 'Warder, Dollo zone',
-    gridImages: ['/WarderKebrideharRoadProject/Picture21.png', '/WarderKebrideharRoadProject/picOne.jpg', '/WarderKebrideharRoadProject/picTwo.jpg', '/WarderKebrideharRoadProject/picFour.png']
-  },
-  'addis-commercial-tower': {
-    id: 'addis-commercial-tower',
-    title: 'Addis Commercial Tower',
-    description: 'Modern high-rise commercial complex in the heart of Addis Ababa featuring retail spaces, offices, and parking facilities.',
-    fullDescription: 'The Addis Commercial Tower represents modern commercial development in Addis Ababa\'s prime business district. This high-rise complex features state-of-the-art office spaces, retail establishments, and comprehensive parking facilities. The project showcases MACRO\'s capability in delivering large-scale commercial developments that serve the growing business community in Ethiopia\'s capital.',
-    location: 'Addis Ababa, Nifas Silk Lafto Sub city',
-    client: 'Private Developer',
-    date: '2020',
-    tags: ['Completed', 'Commercial', 'Real Estate'],
-    category: 'Real Estate Development',
-    image: '/background/1.png',
-    status: 'Completed',
-    gridImages: ['/background/1.png', '/background/2.png', '/background/3.png', '/background/4.png']
-  },
-  'residential-complex-project': {
-    id: 'residential-complex-project',
-    title: 'Premium Residential Complex',
-    description: 'Luxury residential development with 120+ units, modern amenities, and premium finishes in prime location.',
-    fullDescription: 'Our Premium Residential Complex development represents the pinnacle of luxury living in Addis Ababa. With 120+ carefully designed residential units, this project offers modern amenities, premium finishes, and an exceptional living experience. Located in a prime area of Bole District, the complex features state-of-the-art facilities including fitness centers, community spaces, and secure parking.',
-    location: 'Addis Ababa, Bole District',
-    client: 'Premium Properties PLC',
-    date: '2021',
-    tags: ['Active Projects', 'Residential', 'Real Estate'],
-    category: 'Real Estate Development',
-    image: '/background/2.png',
-    status: 'Active'
-  },
-  'bridge-construction-1': {
-    id: 'bridge-construction-1',
-    title: 'Highway Bridge Construction',
-    description: 'Major bridge infrastructure project spanning critical river crossings for improved regional connectivity.',
-    fullDescription: 'This major highway bridge construction project involved building critical infrastructure to span significant river crossings, dramatically improving regional connectivity. The bridge incorporates modern engineering standards, ensuring long-term durability and capacity for heavy traffic loads. This project demonstrates MACRO\'s expertise in complex infrastructure development.',
-    location: 'Various Locations',
-    client: 'Ethiopian Roads Authority',
-    date: '2019',
-    tags: ['Completed', 'Infrastructure', 'Bridge Construction'],
-    category: 'Infrastructure',
-    image: '/background/3.png',
-    status: 'Completed'
-  },
-  'urban-highway-expansion': {
-    id: 'urban-highway-expansion',
-    title: 'Urban Highway Expansion',
-    description: 'Expansion and modernization of major urban highways with enhanced safety features and modern infrastructure.',
-    fullDescription: 'The Urban Highway Expansion project involves the comprehensive modernization and expansion of major transportation arteries within the Addis Ababa Metropolitan Area. This critical infrastructure project includes enhanced safety features, improved traffic flow, and modern infrastructure elements designed to meet the growing demands of Ethiopia\'s capital city.',
-    location: 'Addis Ababa Metropolitan Area',
-    client: 'Ministry of Urban Development',
-    date: '2022',
-    tags: ['Active Projects', 'Urban Development', 'Highways'],
-    category: 'Road Construction',
-    image: '/background/4.png',
-    status: 'Active'
-  },
-  'fik-segeg-gebro-yoale': {
-    id: 'fik-segeg-gebro-yoale',
-    title: 'Fik-Segeg-Gebro-Danan Road Project, Lot II',
-    description: 'Segeg-Gebro-Yoale Road (Km 90+000 – Km 191+000).',
-    fullDescription: 'The Fik-Segeg-Gebro-Danan Road Project, Lot II is a major road construction initiative covering the Segeg-Gebro-Yoale Road section from Km 90+000 to Km 191+000. This project is part of a larger infrastructure development effort in the Somali Region, designed to improve regional connectivity and facilitate economic growth through enhanced transportation infrastructure.',
-    location: 'Somali Region',
-    client: 'Ethiopian Roads Authority',
-    date: '2022-2025',
-    tags: ['Active', 'Road Construction', '28% Progress'],
-    category: 'Road Construction',
-    image: '/background/3.png',
-    status: 'Active',
-    gridImages: ['/SegegGerbo/Picture19.png', '/SegegGerbo/Picture20.png', '/SegegGerbo/picture21.jpg', '/SegegGerbo/Picture19.png']
-  },
-  'bishoftu-corridor': {
-    id: 'bishoftu-corridor',
-    title: 'Bishoftu Corridor Development Project',
-    description: 'Corridor side development project.',
-    fullDescription: 'The Bishoftu Corridor Development Project focuses on comprehensive corridor side development, enhancing the infrastructure and amenities along the corridor. This project includes road improvements, landscaping, and development of supporting infrastructure to create a modern, efficient transportation corridor.',
-    location: 'Bishoftu',
-    client: 'Ethiopian Roads Authority',
-    date: '2023-2024',
-    tags: ['Active', 'Corridor Development', '90% Progress'],
-    category: 'Road Construction',
-    image: '/Bishoftu/picture2.jpg',
-    status: 'Active',
-    gridImages: ['/Bishoftu/picture1.jpg', '/Bishoftu/picture2.jpg', '/Bishoftu/Picture3.png', '/Bishoftu/picture1.jpg']
-  },
-  'shaggar-city': {
-    id: 'shaggar-city',
-    title: 'Shaggar City Corridor Development',
-    description: 'Burayu Sub-City Corridor lot-1 (3.51km).',
-    fullDescription: 'The Shaggar City Corridor Development project involves the development of a 3.51km corridor in Burayu Sub-City. This project aims to improve urban connectivity and infrastructure, creating a modern transportation corridor that serves the growing needs of the Shaggar City area.',
-    location: 'Burayu Sub-City',
-    client: 'Ethiopian Roads Authority',
-    date: '2023-2024',
-    tags: ['Active', 'Corridor Development', '46% Progress'],
-    category: 'Road Construction',
-    image: '/right/1.png',
-    status: 'Active'
-  },
-  'fik-hamero-imi': {
-    id: 'fik-hamero-imi',
-    title: 'Fik-Hamero-Imi Road Project',
-    description: 'Construction of 81 km DBST, Bridge, Earthwork, Sub-base, Base course, and drainage structures.',
-    fullDescription: 'The Fik-Hamero-Imi Road Project involved the comprehensive construction of an 81 km road including Double Bituminous Surface Treatment (DBST), bridge construction, extensive earthwork, sub-base and base course preparation, and complete drainage structures. This major infrastructure project significantly improved connectivity in the Somali Region.',
-    location: 'Somali Region',
-    client: 'Ethiopian Roads Authority',
-    date: 'May 2017 - March 2023',
-    tags: ['Completed', 'Road Construction', '81 km'],
-    category: 'Road Construction',
-    image: '/FikHameroimiRoadProject/Picture23.png',
-    status: 'Completed',
-    gridImages: ['/FikHameroImiRoadProject/Picture12.png', '/FikHameroImiRoadProject/Picture23.png']
-  },
-  'ayat-roundabout': {
-    id: 'ayat-roundabout',
-    title: 'Ayat Roundabout - Bole Arabsa Asphalt Road',
-    description: 'Construction of 4.2km Asphalt Concrete Road Project with TELE utility & EPPCO utility line.',
-    fullDescription: 'The Ayat Roundabout - Bole Arabsa Asphalt Road project involved the construction of a 4.2km asphalt concrete road, including integration with TELE utility and EPPCO utility lines. This urban infrastructure project enhanced connectivity in Addis Ababa while ensuring proper utility integration.',
-    location: 'Addis Ababa',
-    client: 'Addis Ababa Roads Authority',
-    date: 'December 2015 - May 2017',
-    tags: ['Completed', 'Asphalt Road', '4.2 km'],
-    category: 'Road Construction',
-    image: '/background/5.png',
-    status: 'Completed'
-  },
-  'cmc-michael-bridge': {
-    id: 'cmc-michael-bridge',
-    title: 'CMC-Michael Overpass Bridge',
-    description: 'Construction of overpass bridge and related approach road from Michael side to Goro side.',
-    fullDescription: 'The CMC-Michael Overpass Bridge project involved the construction of a major overpass bridge and related approach roads connecting the Michael side to the Goro side. This critical infrastructure project improved traffic flow and connectivity in Addis Ababa, addressing congestion and enhancing urban mobility.',
-    location: 'Addis Ababa',
-    client: 'Addis Ababa City Roads Authority',
-    date: 'October 2014 - July 2021',
-    tags: ['Completed', 'Bridge Construction'],
-    category: 'Infrastructure',
-    image: '/CMCMichaelOverpassBridge/Picture11.png',
-    status: 'Completed'
-  },
-  'hargale-dolobay': {
-    id: 'hargale-dolobay',
-    title: 'Hargale - Dolobay - Dolo Odo Design Build Road',
-    description: 'Design & Build of 82 km Road Project including Genale River Bridge (140m, 7 spans).',
-    fullDescription: 'The Hargale - Dolobay - Dolo Odo Design Build Road project was a comprehensive 82 km road construction initiative that included the design and construction of the Genale River Bridge, a significant 140-meter bridge with 7 spans. This project demonstrated MACRO\'s capability in handling complex design-build projects with major bridge infrastructure.',
-    location: 'Somali Region',
-    client: 'Ethiopian Roads Authority',
-    date: 'September 2010 - April 2014',
-    tags: ['Completed', 'Design Build', '82 km'],
-    category: 'Road Construction',
-    image: '/background/7.png',
-    status: 'Completed'
-  },
-  'nehile-ab-ala': {
-    id: 'nehile-ab-ala',
-    title: 'Nehile-Ab Ala Road Project',
-    description: 'Construction of 58.7 km Road Project with all necessary drainage structures including 21 bridges.',
-    fullDescription: 'The Nehile-Ab Ala Road Project involved the construction of a 58.7 km road with comprehensive drainage structures and 21 bridges. This major infrastructure project significantly improved regional connectivity, demonstrating MACRO\'s expertise in complex road construction with extensive bridge infrastructure.',
-    location: 'Various Regions',
-    client: 'Ethiopian Roads Authority',
-    date: 'April 2010 - May 2014',
-    tags: ['Completed', 'Road Construction', '21 Bridges'],
-    category: 'Road Construction',
-    image: '/background/8.png',
-    status: 'Completed'
-  },
-  'addis-residential-complex': {
-    id: 'addis-residential-complex',
-    title: 'Addis Ababa Residential Complex',
-    description: 'Modern residential complex featuring luxury apartments, commercial spaces, and recreational facilities in the heart of Addis Ababa.',
-    fullDescription: 'The Addis Ababa Residential Complex is a premier real estate development project located in the heart of Ethiopia\'s capital. This modern residential complex features luxury apartments with contemporary designs, integrated commercial spaces, and comprehensive recreational facilities. The project represents MACRO\'s commitment to delivering high-quality residential developments that meet the growing demand for modern living spaces in Addis Ababa. With state-of-the-art amenities and prime location, this complex offers residents an exceptional living experience.',
-    location: 'Addis Ababa',
-    client: 'Private Developer',
-    date: '2022-2025',
-    tags: ['Active', 'Residential', '85% Progress'],
-    category: 'Real Estate Development',
-    image: '/background/1.png',
-    status: 'Active'
-  },
-  'bishoftu-mixed-use': {
-    id: 'bishoftu-mixed-use',
-    title: 'Bishoftu Mixed-Use Development',
-    description: 'Integrated mixed-use development including residential units, shopping mall, office spaces, and hotel facilities.',
-    fullDescription: 'The Bishoftu Mixed-Use Development is a comprehensive real estate project that integrates multiple functions in a single development. This innovative project includes modern residential units, a shopping mall with retail spaces, commercial office buildings, and hotel facilities. Located in the rapidly developing city of Bishoftu, this mixed-use development creates a vibrant community hub that serves residents, businesses, and visitors. The project demonstrates MACRO\'s expertise in creating integrated developments that combine residential, commercial, and hospitality functions.',
-    location: 'Bishoftu',
-    client: 'Private Developer',
-    date: '2023-2026',
-    tags: ['Active', 'Mixed-Use', '45% Progress'],
-    category: 'Real Estate Development',
-    image: '/Bishoftu/picture3.jpg',
-    status: 'Active'
-  },
-  'gondar-housing-project': {
-    id: 'gondar-housing-project',
-    title: 'Gondar Affordable Housing Project',
-    description: 'Large-scale affordable housing development project providing quality homes for middle-income families.',
-    fullDescription: 'The Gondar Affordable Housing Project is a large-scale residential development initiative designed to address the housing needs of middle-income families in Gondar. This project provides quality, affordable homes with modern amenities and infrastructure. The development includes well-planned residential units, community facilities, and supporting infrastructure. This project demonstrates MACRO\'s commitment to social responsibility by delivering quality housing solutions that are accessible to middle-income families, contributing to urban development and improving living standards in Gondar.',
-    location: 'Gondar',
-    client: 'Ministry of Urban Development',
-    date: '2021-2024',
-    tags: ['Active', 'Affordable Housing', '92% Progress'],
-    category: 'Real Estate Development',
-    image: '/right/1.png',
-    status: 'Active'
-  },
-  'hawassa-luxury-villas': {
-    id: 'hawassa-luxury-villas',
-    title: 'Hawassa Luxury Villas',
-    description: 'Exclusive gated community featuring luxury villas with modern amenities and lake views.',
-    fullDescription: 'The Hawassa Luxury Villas project is an exclusive gated community development featuring premium luxury villas with stunning lake views. Located in the beautiful city of Hawassa, this project offers residents an exceptional living experience with modern amenities, private spaces, and breathtaking natural surroundings. Each villa is designed with attention to detail, featuring high-quality finishes and contemporary architecture. The gated community provides security, privacy, and a sense of community, making it one of the most desirable residential developments in the region.',
-    location: 'Hawassa',
-    client: 'Private Developer',
-    date: 'March 2019 - August 2022',
-    tags: ['Completed', 'Luxury Housing', '50 Villas'],
-    category: 'Real Estate Development',
-    image: '/background/7.png',
-    status: 'Completed'
+  if (typeof fullDescription === 'string') {
+    try {
+      const parsed = JSON.parse(fullDescription)
+      if (Array.isArray(parsed)) {
+        fullDescription = parsed as StrapiContentBlock
+      } else {
+        return fullDescription
+      }
+    } catch {
+      return typeof fullDescription === 'string' ? fullDescription : ''
+    }
   }
+
+  if (Array.isArray(fullDescription)) {
+    return (fullDescription as StrapiContentBlock)
+      .map((block: any) => block?.children?.map((c: any) => c?.text).join(' ') || '')
+      .filter(Boolean)
+      .join('\n\n')
+  }
+
+  return typeof fullDescription === 'string' ? fullDescription : ''
 }
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const project = projectDetails[slug]
+type ProjectTransformed = ProjectDetail
+
+export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const slug = decodeURIComponent(params.slug)
+
+  let project: ProjectTransformed | null = null
+  try {
+    project = await fetchProjectBySlug(slug)
+  } catch (e) {
+    console.error('Failed to fetch project detail:', e)
+    return notFound()
+  }
 
   if (!project) {
-    notFound()
+    return notFound()
   }
 
-  const relatedProjects = Object.values(projectDetails)
-    .filter(p => p.id !== project.id)
-    .slice(0, 3)
+  const overviewText = extractText(project.fullDescription) || project.description || ''
+
+  let relatedProjects: BaseProject[] = []
+  try {
+    const all = await fetchAllProjects()
+    relatedProjects = all.filter((p) => p.slug !== project!.slug).slice(0, 3)
+  } catch {
+    relatedProjects = []
+  }
+
+  const gridImages: string[] = project.gridImages?.length
+    ? project.gridImages
+    : ['/placeholder-grid-1.png', '/placeholder-grid-2.png', '/placeholder-grid-3.png', '/placeholder-grid-4.png']
 
   return (
     <main className="min-h-screen">
       <Header />
-      
-      {/* Hero Section */}
       <section className="relative text-white py-32 overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src={project.image}
-            alt={project.title}
+            alt={project.title || 'Project'}
             fill
             className="object-cover"
             priority
           />
-          {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
         </div>
-        
-        {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link href="/projects" className="inline-flex items-center gap-2 text-white mb-8 hover:text-brand-300 transition-colors">
             <ArrowLeft className="h-5 w-5" />
             <span>Back to Projects</span>
           </Link>
-
           <div className="mb-6">
-            <span className={`px-4 py-2 rounded-full text-sm font-semibold ${
-              project.status === 'Active' 
-                ? 'bg-brand-600 text-white' 
-                : 'bg-green-600 text-white'
-            }`}>
+            <span
+              className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                project.status === 'Active' ? 'bg-brand-600 text-white' : 'bg-green-600 text-white'
+              }`}
+            >
               {project.status}
             </span>
           </div>
-
           <h1 className="text-5xl md:text-6xl font-bold mb-6">{project.title}</h1>
           <p className="text-xl md:text-2xl text-gray-200 max-w-3xl">{project.description}</p>
         </div>
       </section>
 
-      {/* Project Details */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
-                <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                  {project.fullDescription}
+
+                <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line mb-6">
+                  {overviewText || project.description}
                 </p>
 
-                {/* Key Features - Only show for road projects */}
                 {project.startingPoint && project.endingPoint && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
                     <div className="bg-gray-50 p-6 rounded-lg">
@@ -354,9 +138,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 )}
               </div>
 
-              {/* Project Images */}
               <div className="grid grid-cols-2 gap-4 mb-12">
-                {(project.gridImages || ['/background/1.png', '/background/2.png', '/background/3.png', '/background/4.png']).map((imgSrc, imgIndex) => (
+                {gridImages.map((imgSrc, imgIndex) => (
                   <div key={imgIndex} className="relative h-64 rounded-lg overflow-hidden">
                     <Image
                       src={imgSrc}
@@ -369,100 +152,81 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               </div>
             </div>
 
-            {/* Sidebar */}
             <div>
               <div className="bg-gray-50 p-8 rounded-lg sticky top-24">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Project Information</h3>
-                
                 <div className="space-y-6">
                   <div>
                     <div className="flex items-center gap-2 text-gray-600 mb-2">
-                      <Building className="h-5 w-5" />
-                      <span className="font-medium">Category</span>
+                      <MapPin className="h-5 w-5" />
+                      <span className="font-semibold text-gray-900">Location</span>
                     </div>
-                    <p className="text-gray-900 font-semibold">{project.category}</p>
+                    <p className="text-gray-700">{project.location}</p>
                   </div>
-
                   <div>
                     <div className="flex items-center gap-2 text-gray-600 mb-2">
                       <User className="h-5 w-5" />
-                      <span className="font-medium">Client</span>
+                      <span className="font-semibold text-gray-900">Client</span>
                     </div>
-                    <p className="text-gray-900 font-semibold">{project.client}</p>
+                    <p className="text-gray-700">{project.client}</p>
                   </div>
-
                   <div>
                     <div className="flex items-center gap-2 text-gray-600 mb-2">
-                      <Calendar className="h-5 w-5" />
-                      <span className="font-medium">Date</span>
+                      <Clock className="h-5 w-5" />
+                      <span className="font-semibold text-gray-900">Date</span>
                     </div>
-                    <p className="text-gray-900 font-semibold">{project.date}</p>
+                    <p className="text-gray-700">{project.date}</p>
                   </div>
-
                   <div>
                     <div className="flex items-center gap-2 text-gray-600 mb-2">
                       <MapPin className="h-5 w-5" />
-                      <span className="font-medium">Location</span>
+                      <span className="font-semibold text-gray-900">Category</span>
                     </div>
-                    <p className="text-gray-900 font-semibold">{project.location}</p>
+                    <p className="text-gray-700">{project.category}</p>
                   </div>
-
-                  <div>
-                    <p className="text-gray-600 mb-3 font-medium">Tags</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, index) => (
-                        <span key={index} className="px-3 py-1 bg-brand-100 text-brand-700 text-sm rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Link
-                    href="/contact"
-                    className="block w-full bg-brand-600 hover:bg-brand-700 text-white text-center py-3 px-6 rounded-lg font-semibold transition-colors duration-300"
-                  >
-                    Contact About This Project
-                  </Link>
                 </div>
+
+                {project.contractValue && (
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <p className="font-semibold text-lg text-gray-900">Contract Value</p>
+                    <p className="text-xl font-bold text-brand-600">{project.contractValue}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Related Projects */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">
-            Related <span className="text-brand-600">Projects</span>
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {relatedProjects.map((relatedProject) => (
-              <Link
-                key={relatedProject.id}
-                href={`/projects/${relatedProject.id}`}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 group"
-              >
-                <div className="relative h-48">
-                  <Image
-                    src={relatedProject.image}
-                    alt={relatedProject.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40"></div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors">
-                    {relatedProject.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm line-clamp-2">{relatedProject.description}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          {relatedProjects.length > 0 && (
+            <div className="mt-16">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Projects</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedProjects.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/projects/${encodeURIComponent(related.slug || related.id || '')}`}
+                    className="group bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+                  >
+                    <div className="relative h-48 overflow-hidden">
+                      <Image
+                        src={related.image}
+                        alt={related.title || 'Project'}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/30"></div>
+                      <div className="absolute bottom-3 left-3 text-white">
+                        <span className="text-sm bg-brand-600 px-2 py-1 rounded">{related.category}</span>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h4 className="font-bold text-gray-900 mb-2">{related.title}</h4>
+                      <p className="text-sm text-gray-600 line-clamp-2">{related.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
