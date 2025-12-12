@@ -123,12 +123,13 @@ export default function ProjectsPage() {
     )
   }
 
-  // Error state (unchanged)
-  if (error) {
-    return (
-      <main className="min-h-screen">
-        <Header />
-        <section className="relative text-white pt-24 pb-24 overflow-hidden -mt-24">
+  // Error state
+  if (error) {
+    console.error('Projects page error:', error)
+    return (
+      <main className="min-h-screen">
+        <Header />
+        <section className="relative text-white py-24 overflow-hidden">
           <div className="absolute inset-0">
             <Image
               src="/Bishoftu/picture2.jpg"
@@ -139,24 +140,27 @@ export default function ProjectsPage() {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
           </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
             </div>
           </div>
         </section>
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center py-20">
-              <p className="text-lg text-red-600 mb-4">Error loading projects. Please check your Strapi configuration.</p>
-              <p className="text-sm text-gray-500">Make sure NEXT_PUBLIC_STRAPI_URL is set correctly in your .env.local file</p>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </main>
-    )
-  }
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center py-20">
+              <p className="text-lg text-red-600 mb-4">Error loading projects. Please check your Strapi configuration.</p>
+              <p className="text-sm text-gray-500 mb-2">Make sure NEXT_PUBLIC_STRAPI_URL is set correctly in your .env.local file</p>
+              <p className="text-xs text-gray-400 mt-4">
+                Error: {error instanceof Error ? error.message : String(error)}
+              </p>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </main>
+    )
+  }
 
   return (
     <main className="min-h-screen">
@@ -246,12 +250,13 @@ export default function ProjectsPage() {
                 className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full flex flex-col"
               >
                 {/* Image container with fixed height */}
-                <div className="relative w-full h-48 overflow-hidden"> 
+                <div className="relative w-full h-48 overflow-hidden bg-gray-200"> 
                   <Image
-                    src={project.image}
+                    src={project.image || '/placeholder.png'}
                     alt={project.title}
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    unoptimized={project.image?.startsWith('http')}
                   />
                   <div className="absolute inset-0 bg-black/30 transition-opacity duration-300 group-hover:bg-black/40"></div>
                   

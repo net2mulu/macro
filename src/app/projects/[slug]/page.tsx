@@ -9,7 +9,7 @@ import { MapPin, ArrowLeft, User, Clock } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { fetchProjectBySlug, fetchAllProjects } from '@/lib/strapi-fetch'
+import { fetchProjectBySlug, fetchProjects, transformProject } from '@/lib/strapi'
 import { ProjectDetail, BaseProject, StrapiContentBlock } from '@/lib/interfaces'
 
 /**
@@ -45,18 +45,27 @@ function extractText(fullDescription: unknown): string {
 
 type ProjectTransformed = ProjectDetail
 
-export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const slug = decodeURIComponent(params.slug)
+export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params
+  const slug = decodeURIComponent(resolvedParams.slug)
+  
+  console.log('Project detail page - slug:', slug)
 
   let project: ProjectTransformed | null = null
   try {
-    project = await fetchProjectBySlug(slug)
+    const response = await fetchProjectBySlug(slug)
+    console.log('Fetch response:', { hasData: !!response.data, slug })
+    if (response.data) {
+      project = transformProject(response.data) as ProjectTransformed
+      console.log('Transformed project:', { title: project.title, slug: project.slug })
+    }
   } catch (e) {
     console.error('Failed to fetch project detail:', e)
     return notFound()
   }
 
-  if (!project) {
+  if (!project || !project.title) {
+    console.error('Project not found or invalid:', { project, slug })
     return notFound()
   }
 
@@ -64,8 +73,11 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
 
   let relatedProjects: BaseProject[] = []
   try {
-    const all = await fetchAllProjects()
-    relatedProjects = all.filter((p) => p.slug !== project!.slug).slice(0, 3)
+    const allResponse = await fetchProjects()
+    if (allResponse.data) {
+      const all = allResponse.data.map(transformProject) as BaseProject[]
+      relatedProjects = all.filter((p) => p.slug !== project!.slug).slice(0, 3)
+    }
   } catch {
     relatedProjects = []
   }

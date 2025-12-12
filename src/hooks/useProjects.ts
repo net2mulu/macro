@@ -26,8 +26,17 @@ export function useProjects() {
   return useQuery({
     queryKey: ['projects'],
     queryFn: async () => {
-      const response = await fetchProjects()
-      return response.data.map(transformProject) as Project[]
+      try {
+        const response = await fetchProjects()
+        if (!response || !response.data) {
+          console.error('Invalid response from fetchProjects:', response)
+          return []
+        }
+        return response.data.map(transformProject) as Project[]
+      } catch (error) {
+        console.error('Error fetching projects:', error)
+        throw error
+      }
     },
     staleTime: 5 * 60 * 1000, // 5 minutes
     refetchOnWindowFocus: false,
