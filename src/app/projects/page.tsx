@@ -4,7 +4,7 @@
 import { useState, useMemo } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Calendar, MapPin, Building, ArrowRight, Loader2 } from 'lucide-react'
+import { Calendar, MapPin, ArrowRight, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 // Type-safe imports
@@ -93,24 +93,23 @@ export default function ProjectsPage() {
     return (
       <main className="min-h-screen">
         <Header />
-        <section className="relative text-white py-24 overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="/Bishoftu/picture2.jpg"
-              alt="Our Projects"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <Building className="h-10 w-10 text-white" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
-          </div>
-        </section>
+        <section className="relative text-white pt-24 pb-24 overflow-hidden -mt-24">
+          <div className="absolute inset-0">
+            <Image
+              src="/Bishoftu/picture2.jpg"
+              alt="Our Projects"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+            <div className="text-center">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
+            </div>
+          </div>
+        </section>
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-center py-20">
@@ -129,24 +128,23 @@ export default function ProjectsPage() {
     return (
       <main className="min-h-screen">
         <Header />
-        <section className="relative text-white py-24 overflow-hidden">
-          <div className="absolute inset-0">
-            <Image
-              src="/Bishoftu/picture2.jpg"
-              alt="Our Projects"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-          </div>
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <Building className="h-10 w-10 text-white" />
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
-          </div>
-        </section>
+        <section className="relative text-white pt-24 pb-24 overflow-hidden -mt-24">
+          <div className="absolute inset-0">
+            <Image
+              src="/Bishoftu/picture2.jpg"
+              alt="Our Projects"
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+            <div className="text-center">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
+            </div>
+          </div>
+        </section>
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center py-20">
@@ -164,144 +162,147 @@ export default function ProjectsPage() {
     <main className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="relative text-white py-24 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/Bishoftu/picture2.jpg"
-            alt="Our Projects"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-            <Building className="h-10 w-10 text-white" />
-            </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
-          <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto drop-shadow-lg">
-            Delivering excellence in construction and infrastructure across Ethiopia
-          </p>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <section className="relative text-white pt-24 pb-24 overflow-hidden -mt-24">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/Bishoftu/picture2.jpg"
+            alt="Our Projects"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80"></div>
+        </div>
+        
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Projects</h1>
+            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto drop-shadow-lg">
+              Delivering excellence in construction and infrastructure across Ethiopia
+            </p>
+          </div>
+        </div>
+      </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-5xl font-bold text-brand-600 mb-2">200+</div>
-              <div className="text-lg text-gray-700">Completed Projects</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold text-brand-600 mb-2">10-15</div>
-              <div className="text-lg text-gray-700">Active Projects</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold text-brand-600 mb-2">30+</div>
-              <div className="text-lg text-gray-700">Years Experience</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold text-brand-600 mb-2">Grade I</div>
-              <div className="text-lg text-gray-700">Certification</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Stats Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap justify-center md:justify-between gap-8 text-center">
+            <div className="flex-1 min-w-[150px]">
+              <div className="text-5xl font-bold text-brand-600 mb-2">200+</div>
+              <div className="text-lg text-gray-700">Completed Projects</div>
+            </div>
+            <div className="flex-1 min-w-[150px]">
+              <div className="text-5xl font-bold text-brand-600 mb-2">10-15</div>
+              <div className="text-lg text-gray-700">Active Projects</div>
+            </div>
+            <div className="flex-1 min-w-[150px]">
+              <div className="text-5xl font-bold text-brand-600 mb-2">30+</div>
+              <div className="text-lg text-gray-700">Years Experience</div>
+            </div>
+            <div className="flex-1 min-w-[150px]">
+              <div className="text-5xl font-bold text-brand-600 mb-2">Grade I</div>
+              <div className="text-lg text-gray-700">Certification</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Projects Grid */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => handleCategoryChange(category)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'bg-brand-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+      {/* Projects Grid */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Filter Tabs */}
+          <div className="flex flex-wrap gap-4 justify-center mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'bg-brand-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-brand-600 hover:text-white'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
 
-          {/* Projects Grid */}
-          {filteredProjects.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-lg text-gray-600">No projects found in this category.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project) => (
-              <Link
-                key={project.id}
-                href={`/projects/${encodeURIComponent(project.slug || project.id)}`}
-                // Restored/Improved styling for card wrapper
-                className="group bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              >
-                {/* CRITICAL FIX: Image container uses aspect-video for correct ratio */}
-                <div className="relative w-full aspect-video overflow-hidden"> 
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40 transition-opacity duration-300 group-hover:bg-black/50"></div>
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-4 left-4 z-20">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      project.status === 'Active' 
-                        ? 'bg-brand-600 text-white' 
-                        : 'bg-green-600 text-white'
-                    }`}>
-                      {project.status}
-                    </span>
-                  </div>
+          {/* Projects Grid */}
+          {filteredProjects.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-lg text-gray-600">No projects found in this category.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-start">
+              {filteredProjects.map((project) => (
+              <Link
+                key={project.id}
+                href={`/projects/${encodeURIComponent(project.slug || project.id)}`}
+                className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full flex flex-col"
+              >
+                {/* Image container with fixed height */}
+                <div className="relative w-full h-48 overflow-hidden"> 
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/30 transition-opacity duration-300 group-hover:bg-black/40"></div>
+                  
+                  {/* Status Badge */}
+                  <div className="absolute top-3 left-3 z-20">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
+                      project.status === 'Active' 
+                        ? 'bg-brand-600 text-white' 
+                        : 'bg-green-600 text-white'
+                    }`}>
+                      {project.status}
+                    </span>
+                  </div>
 
-                  {/* Location/Category Info */}
-                  <div className="absolute bottom-4 left-4 text-white z-20">
-                    <div className="flex items-center gap-2 mb-2">
-                      <MapPin className="h-4 w-4" />
-                      <span className="text-sm">{project.category}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
-                  
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4 pt-4 border-t">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4" />
-                      <span>{project.date}</span>
-                    </div>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  {/* Category Badge */}
+                  <div className="absolute bottom-3 left-3 z-20">
+                    <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-full">
+                      <MapPin className="h-3.5 w-3.5 text-white" />
+                      <span className="text-xs text-white font-medium">{project.category}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Content area with better spacing */}
+                <div className="p-5 flex flex-col flex-1">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors line-clamp-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-4 line-clamp-2 flex-1">{project.description}</p>
+                  
+                  {/* Date and Arrow */}
+                  <div className="flex items-center justify-between text-xs text-gray-500 mb-3 pt-3 border-t border-gray-100">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="h-3.5 w-3.5" />
+                      <span>{project.date}</span>
+                    </div>
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform text-brand-600" />
+                  </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 2).map((tag, index) => (
-                      <span key={index} className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Link>
+                  {/* Tags */}
+                  {project.tags && project.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.slice(0, 2).map((tag: string, index: number) => (
+                        <span key={index} className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Link>
               ))}
             </div>
           )}
