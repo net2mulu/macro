@@ -129,14 +129,64 @@ export function getStrapiImageUrl(image: any): string {
 }
 
 // Helper function to get multiple image URLs
+// Based on Strapi REST API documentation: https://docs.strapi.io/cms/api/rest/interactive-query-builder
 export function getStrapiImageUrls(images: any): string[] {
   if (!images) return []
+  
+  // Handle array of strings (direct URLs)
   if (Array.isArray(images) && typeof images[0] === 'string') {
-    return images.map((u) => getStrapiImageUrl(u))
+    return images.map((u) => getStrapiImageUrl(u)).filter(Boolean)
   }
+  
+  // Handle Strapi media structure with data array
+  // Format: { data: [{ id, attributes: { url, ... } }] } or { data: [{ id, url, ... }] }
   if (images?.data && Array.isArray(images.data)) {
-    return images.data.map((img: any) => getStrapiImageUrl({ data: img }))
+    return images.data.map((img: any) => {
+      // Case 1: img.attributes.url (nested attributes structure)
+      if (img?.attributes?.url) {
+        return getStrapiImageUrl({ data: { attributes: img.attributes } })
+      }
+      
+      // Case 2: img.url (flat structure without attributes wrapper)
+      if (img?.url) {
+        return getStrapiImageUrl(img)
+      }
+      
+      // Case 3: img.data.attributes.url (double nested)
+      if (img?.data?.attributes?.url) {
+        return getStrapiImageUrl({ data: img.data })
+      }
+      
+      // Case 4: Try to extract URL from any nested structure
+      if (img?.attributes) {
+        return getStrapiImageUrl({ data: { attributes: img.attributes } })
+      }
+      
+      // Case 5: Fallback - try to use the image object directly
+      return getStrapiImageUrl({ data: img })
+    }).filter(Boolean)
   }
+  
+  // Handle array of image objects directly (without data wrapper)
+  // Format: [{ attributes: { url } }] or [{ url }]
+  if (Array.isArray(images) && typeof images[0] === 'object') {
+    return images.map((img: any) => {
+      if (img?.attributes?.url) {
+        return getStrapiImageUrl({ data: { attributes: img.attributes } })
+      }
+      if (img?.url) {
+        return getStrapiImageUrl(img)
+      }
+      return getStrapiImageUrl({ data: img })
+    }).filter(Boolean)
+  }
+  
+  // Handle single image object (not in array)
+  if (images?.attributes || images?.url) {
+    const singleUrl = getStrapiImageUrl(images)
+    return singleUrl && singleUrl !== '/placeholder.png' ? [singleUrl] : []
+  }
+  
   return []
 }
 
@@ -216,6 +266,16 @@ export function transformProject(strapiProject: StrapiProject) {
     picture: (attr as any).picture,
   }
   
+  // Extract grid images - try multiple field name variations
+  const gridImagesRaw = 
+    attr.gridImages || 
+    (attr as any).grid_images || 
+    (attr as any).gridImage || 
+    (attr as any).gallery || 
+    (attr as any).galleryImages ||
+    (attr as any).images
+  const gridImagesUrls = getStrapiImageUrls(gridImagesRaw)
+  
   // Debug: log all fields to find image
   if (process.env.NODE_ENV === 'development') {
     const imageFields = Object.entries(allImageFields).filter(([_, value]) => value !== undefined && value !== null)
@@ -223,7 +283,17 @@ export function transformProject(strapiProject: StrapiProject) {
       console.log(`✅ Found image fields for "${attr.title}":`, imageFields)
     } else {
       console.warn(`⚠️ No image fields found for "${attr.title}". Available fields:`, Object.keys(attr))
-      console.log('Full project data:', JSON.stringify(attr, null, 2))
+    }
+    
+    // Debug grid images
+    if (gridImagesRaw) {
+      console.log(`📸 Grid images data for "${attr.title}":`, {
+        raw: gridImagesRaw,
+        extracted: gridImagesUrls,
+        count: gridImagesUrls.length
+      })
+    } else {
+      console.warn(`⚠️ No grid images field found for "${attr.title}". Checked: gridImages, grid_images, gridImage, gallery, galleryImages, images`)
     }
   }
   
@@ -242,7 +312,7 @@ export function transformProject(strapiProject: StrapiProject) {
     status: (attr.projectStatus || attr.status || 'Active').trim(),
     startingPoint: attr.startingPoint,
     endingPoint: attr.endingPoint,
-    gridImages: getStrapiImageUrls(attr.gridImages || (attr as any).grid_images),
+    gridImages: gridImagesUrls,
     contract: attr.contractValue || attr.contract,
   }
 }
@@ -298,10 +368,12 @@ export async function fetchProjects(): Promise<StrapiResponse<StrapiProject[]>> 
 export async function fetchProjectBySlug(slug: string): Promise<StrapiResponse<StrapiProject>> {
   const safeSlug = encodeURIComponent(slug)
   
-  // According to Strapi REST API docs, build the filter query
+  // According to Strapi REST API docs, use populate=* to get all relations including grid images
+  // For nested populate, we can also use: populate[gridImages][populate]=*
   // Try multiple approaches to find the project
   const urls = [
     `${STRAPI_URL}/api/projects?filters[slug][$eq]=${safeSlug}&populate=*`,
+    `${STRAPI_URL}/api/projects?filters[slug][$eq]=${safeSlug}&populate[gridImages][populate]=*`,
     `${STRAPI_URL}/api/projects?filters[documentId][$eq]=${safeSlug}&populate=*`,
     `${STRAPI_URL}/api/projects?filters[id][$eq]=${safeSlug}&populate=*`,
   ]
@@ -323,13 +395,25 @@ export async function fetchProjectBySlug(slug: string): Promise<StrapiResponse<S
       
       // Debug logging
       if (process.env.NODE_ENV === 'development') {
+        const firstItem = data.data?.[0]
+        const attr = firstItem?.attributes || firstItem
         console.log('Project detail fetch response:', {
           slug,
           url,
           hasData: !!data.data,
           dataLength: data.data?.length || 0,
-          firstItem: data.data?.[0] ? Object.keys(data.data[0]) : null
+          firstItemKeys: firstItem ? Object.keys(firstItem) : null,
+          attrKeys: attr ? Object.keys(attr) : null,
+          gridImagesField: attr?.gridImages || attr?.grid_images || attr?.gridImage || attr?.gallery,
+          gridImagesType: typeof (attr?.gridImages || attr?.grid_images || attr?.gridImage || attr?.gallery),
+          gridImagesIsArray: Array.isArray(attr?.gridImages || attr?.grid_images || attr?.gridImage || attr?.gallery)
         })
+        
+        // Log the actual grid images structure if it exists
+        const gridImagesRaw = attr?.gridImages || attr?.grid_images || attr?.gridImage || attr?.gallery
+        if (gridImagesRaw) {
+          console.log('📸 Grid images raw structure:', JSON.stringify(gridImagesRaw, null, 2))
+        }
       }
       
       if (data.data && data.data.length > 0) {

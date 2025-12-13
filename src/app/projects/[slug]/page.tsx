@@ -56,7 +56,16 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     const response = await fetchProjectBySlug(slug)
     console.log('Fetch response:', { hasData: !!response.data, slug })
     if (response.data) {
-      project = transformProject(response.data) as ProjectTransformed
+      const transformed = transformProject(response.data)
+      // Handle fullDescription type - it can be string, array, or undefined
+      project = {
+        ...transformed,
+        fullDescription: (Array.isArray(transformed.fullDescription) 
+          ? transformed.fullDescription 
+          : (typeof transformed.fullDescription === 'string' 
+            ? transformed.fullDescription 
+            : [])) as StrapiContentBlock
+      } as ProjectTransformed
       console.log('Transformed project:', { title: project.title, slug: project.slug })
     }
   } catch (e) {
@@ -82,6 +91,15 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     relatedProjects = []
   }
 
+  // Debug grid images
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Grid images for project:', {
+      title: project.title,
+      gridImages: project.gridImages,
+      count: project.gridImages?.length || 0
+    })
+  }
+  
   const gridImages: string[] = project.gridImages?.length
     ? project.gridImages
     : ['/placeholder-grid-1.png', '/placeholder-grid-2.png', '/placeholder-grid-3.png', '/placeholder-grid-4.png']
@@ -150,18 +168,21 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-12">
-                {gridImages.map((imgSrc, imgIndex) => (
-                  <div key={imgIndex} className="relative h-64 rounded-lg overflow-hidden">
-                    <Image
-                      src={imgSrc}
-                      alt={`${project.title} - Image ${imgIndex + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              {gridImages.length > 0 && (
+                <div className="grid grid-cols-2 gap-4 mb-12">
+                  {gridImages.map((imgSrc, imgIndex) => (
+                    <div key={imgIndex} className="relative h-64 rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={imgSrc}
+                        alt={`${project.title} - Image ${imgIndex + 1}`}
+                        fill
+                        className="object-cover"
+                        unoptimized={imgSrc.startsWith('http') && !imgSrc.includes(process.env.NEXT_PUBLIC_STRAPI_URL || '')}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div>
