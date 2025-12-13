@@ -35,11 +35,15 @@ type StrapiVacancy = {
   title?: string
   description?: any
   employment_type?: string
+  employmentType?: string
   location?: string
   salary_min?: number
+  salaryMin?: number
   salary_max?: number
+  salaryMax?: number
   status?: string
   posted_at?: string
+  postedAt?: string
   deadline?: string
 }
 

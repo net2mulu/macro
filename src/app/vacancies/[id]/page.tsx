@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import {
   ArrowLeft,
   Calendar,
@@ -14,7 +15,9 @@ import {
   Send,
   Phone,
   Mail,
+  SearchX,
 } from 'lucide-react'
+import Image from 'next/image'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useVacancy } from '@/hooks/useVacancies'
@@ -112,17 +115,22 @@ export default function VacancyDetailPage() {
     return (
       <main className="min-h-screen">
         <Header />
-        <section className="py-24 bg-gray-50">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-            <button
-              onClick={() => router.back()}
-              className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700"
-            >
-              <ArrowLeft className="h-4 w-4" /> Back
-            </button>
-            <div className="p-6 rounded-xl bg-white shadow border border-gray-100">
-              <p className="text-lg text-red-600 mb-2">Could not load this vacancy.</p>
-              <p className="text-gray-600">Please return to the listings and try again.</p>
+        <section className="py-24 bg-gray-50 min-h-[60vh] flex items-center justify-center">
+          <div className="max-w-md w-full mx-auto px-4 text-center">
+            <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-6">
+                <SearchX className="h-8 w-8 text-red-500" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">Vacancy not found</h2>
+              <p className="text-gray-600 mb-8">
+                The position you are looking for might have been closed or removed.
+              </p>
+              <button
+                onClick={() => router.push('/vacancies')}
+                className="w-full inline-flex items-center justify-center gap-2 bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-brand-700 transition-colors"
+              >
+                <Briefcase className="h-4 w-4" /> View all vacancies
+              </button>
             </div>
           </div>
         </section>
@@ -131,46 +139,82 @@ export default function VacancyDetailPage() {
     )
   }
 
+
+  const backgrounds = [
+    '/background/projects/1758479191848_BG__desktop_.webp',
+    '/background/projects/1758479668013_LandingPageAds_Desktop_.webp',
+    '/background/projects/Adaba%20Angetu%20Road%20project.jpg',
+    '/background/projects/warder%20kebridehar%20road%20project.jpg',
+  ]
+  const bgIndex = vacancy ? vacancy.id % backgrounds.length : 0
+  const activeBackground = backgrounds[bgIndex]
+
   return (
     <main className="min-h-screen bg-gray-50">
       <Header />
 
-      <section className="py-24 bg-white shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <button
-            onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to vacancies
-          </button>
+      <section className="relative text-white min-h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image 
+            src={activeBackground}
+            alt="Vacancy Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
+        </div>
 
-          <div className="flex flex-col gap-4">
-            <p className="text-sm font-semibold text-brand-600">{vacancy.employmentType || 'Full-time'}</p>
-            <h1 className="text-4xl font-bold text-gray-900">{vacancy.title}</h1>
-            <div className="flex flex-wrap gap-4 text-gray-700 text-sm">
-              <span className="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">
-                <MapPin className="h-4 w-4 text-brand-600" />
-                {vacancy.location || 'Location flexible'}
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">
-                <Clock className="h-4 w-4 text-brand-600" />
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <button
+              onClick={() => router.back()}
+              className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors mb-6 group bg-black/20 hover:bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full md:bg-transparent md:hover:bg-transparent md:backdrop-blur-none md:p-0 md:rounded-none"
+            >
+              <div className="hidden md:block p-2 rounded-full bg-white/10 group-hover:bg-brand-600 transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+              </div>
+              <ArrowLeft className="md:hidden h-4 w-4" />
+              <span className="text-sm font-medium">Back to vacancies</span>
+            </button>
+            
+            <div className="flex flex-wrap items-center gap-3 text-brand-300 font-semibold tracking-wide uppercase text-xs md:text-sm mb-4">
+              <span className="px-3 py-1 rounded-full bg-brand-600/20 border border-brand-500/30 backdrop-blur-sm">
                 {vacancy.employmentType || 'Full-time'}
               </span>
-              <span className="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">
-                <Calendar className="h-4 w-4 text-brand-600" />
-                Posted {formatDate(vacancy.postedAt)}
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">
-                <Calendar className="h-4 w-4 text-brand-600" />
-                Deadline {formatDate(vacancy.deadline)}
-              </span>
-              <span className="inline-flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg">
-                <Briefcase className="h-4 w-4 text-brand-600" />
-                {vacancy.status ? vacancy.status.toUpperCase() : 'OPEN'}
-              </span>
+              <span className="hidden md:block h-1 w-1 rounded-full bg-brand-300"/>
+              <span>{vacancy.location || 'Flexible Location'}</span>
             </div>
-          </div>
 
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl drop-shadow-lg">
+              {vacancy.title}
+            </h1>
+
+            <div className="flex flex-wrap gap-x-6 gap-y-3 text-white/90 text-sm md:text-base">
+              <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg md:bg-transparent md:backdrop-blur-none md:p-0">
+                <Calendar className="h-4 w-4 md:h-5 md:w-5 text-brand-400" />
+                <span>Posted: <span className="font-medium text-white">{formatDate(vacancy.postedAt)}</span></span>
+              </div>
+              <div className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-lg md:bg-transparent md:backdrop-blur-none md:p-0">
+                <Clock className="h-4 w-4 md:h-5 md:w-5 text-brand-400" />
+                <span>Deadline: <span className="font-medium text-white">{formatDate(vacancy.deadline)}</span></span>
+              </div>
+              <div className="hidden md:flex items-center gap-2">
+                <Briefcase className="h-5 w-5 text-brand-400" />
+                <span>ID: <span className="font-medium text-white">#{vacancy.id}</span></span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative -mt-20 z-20 pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 space-y-4">
@@ -215,7 +259,7 @@ export default function VacancyDetailPage() {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 lg:sticky lg:top-24 h-fit">
               {submitMessage && (
                 <div
                   className={`p-4 rounded-xl border ${
@@ -235,28 +279,43 @@ export default function VacancyDetailPage() {
                 </div>
               )}
 
-              <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6 space-y-4">
+              <div className="bg-white border border-gray-100 rounded-2xl shadow-lg p-6 space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm uppercase text-gray-500 tracking-wide">Apply now</p>
-                    <h3 className="text-xl font-semibold text-gray-900">Ready to join?</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mt-1">Ready to join?</h3>
                   </div>
-                  <button
-                    onClick={() => setShowForm(true)}
-                    className="inline-flex items-center gap-2 bg-brand-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-brand-700 transition-colors"
-                  >
-                    <Send className="h-4 w-4" /> Apply
-                  </button>
                 </div>
+                
                 <p className="text-sm text-gray-600">
                   Complete the quick form to apply. We will reach out if your profile matches the role.
                 </p>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <div className="flex items-center gap-2">
-                    <Phone className="h-4 w-4 text-brand-600" /> +251 (0)11 000 0000
+
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-brand-600 text-white px-4 py-3 rounded-xl font-bold hover:bg-brand-700 transition-all shadow-lg hover:shadow-brand-600/20 active:scale-[0.98]"
+                >
+                  <Send className="h-4 w-4" /> Apply for this position
+                </button>
+
+                <div className="pt-6 border-t border-gray-100 space-y-3">
+                  <div className="flex items-center gap-3 text-sm text-gray-600">
+                    <div className="p-2 rounded-full bg-brand-50 text-brand-600">
+                      <Phone className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-400">Call us</p>
+                      <p className="font-semibold text-gray-900">+251 (0)11 000 0000</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Mail className="h-4 w-4 text-brand-600" /> hr@macrogc.com
+                  <div className="flex items-center gap-3 text-sm text-gray-600">
+                     <div className="p-2 rounded-full bg-brand-50 text-brand-600">
+                      <Mail className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-400">Email us</p>
+                      <p className="font-semibold text-gray-900">hr@macrogc.com</p>
+                    </div>
                   </div>
                 </div>
               </div>

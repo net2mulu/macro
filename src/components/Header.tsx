@@ -23,6 +23,7 @@ export default function Header() {
     { name: 'Services', href: '/services' },
     { name: 'Projects', href: '/projects' },
     { name: 'Real Estate', href: '/realestate' },
+    { name: 'Vacancies', href: '/vacancies' },
     { name: 'Contact', href: '/contact' },
   ]
 

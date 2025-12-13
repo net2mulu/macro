@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Briefcase, MapPin, Clock, Calendar, ArrowRight, Loader2, Building2 } from 'lucide-react'
+import { Briefcase, MapPin, Clock, Calendar, ArrowRight, Loader2, Building2, SearchX, RefreshCcw } from 'lucide-react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { useVacancies } from '@/hooks/useVacancies'
@@ -41,7 +41,7 @@ export default function VacanciesPage() {
     [pagination?.total, vacancies]
   )
 
-  const heroBackground = '/background/projects/1758479191848_BG__desktop_.webp'
+  const heroBackground = '/background/3.png'
 
   if (isLoading) {
     return (
@@ -53,11 +53,11 @@ export default function VacanciesPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-              <Briefcase className="h-10 w-10 text-white" />
+            <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
+              <Briefcase className="h-8 w-8 md:h-10 md:w-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Join Macro Construction</h1>
-            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 px-4">Join Macro Construction</h1>
+            <p className="text-base md:text-lg text-white/80 max-w-3xl mx-auto px-4">
               We are loading the latest opportunities for you.
             </p>
           </div>
@@ -85,20 +85,39 @@ export default function VacanciesPage() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
           </div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-500/20 backdrop-blur-sm mb-6">
               <Briefcase className="h-10 w-10 text-white" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">Join Macro Construction</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Join Macro Construction</h1>
             <p className="text-lg text-white/80 max-w-3xl mx-auto">
-              We hit a snag loading the vacancies. Please try again shortly.
+              We encountered a temporary issue loading our open roles.
             </p>
           </div>
         </section>
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center py-16">
-              <p className="text-lg text-red-600 mb-2">Unable to load vacancies.</p>
-              <p className="text-sm text-gray-500">Check your network connection or Strapi availability.</p>
+            <div className="flex flex-col items-center justify-center text-center py-16 border border-dashed border-red-100 rounded-2xl bg-red-50/30">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-6">
+                <RefreshCcw className="h-8 w-8 text-red-500" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Unable to load vacancies</h3>
+              <p className="text-gray-600 max-w-md mx-auto mb-8">
+                Please check your internet connection or try refreshing the page. If the problem persists, feel free to contact us directly.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button 
+                  onClick={() => window.location.reload()}
+                  className="inline-flex items-center justify-center gap-2 bg-brand-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-brand-700 transition-colors"
+                >
+                  <RefreshCcw className="h-4 w-4" /> Try again
+                </button>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white border border-gray-200 text-gray-700 px-6 py-2.5 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+                >
+                  Contact HR
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -118,11 +137,12 @@ export default function VacanciesPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
-            <Briefcase className="h-10 w-10 text-white" />
+          <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-sm mb-6">
+            <Briefcase className="h-8 w-8 md:h-10 md:w-10 text-white" />
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Grow Your Career With Us</h1>
-          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-brand-300 font-semibold tracking-wide uppercase mb-4 text-sm md:text-base">Vacancies</p>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 px-2">Grow Your Career With Us</h1>
+          <p className="text-lg md:text-2xl text-white/90 max-w-3xl mx-auto px-4 leading-relaxed">
             Explore current openings across our construction, engineering, and corporate teams.
           </p>
         </div>
@@ -150,11 +170,11 @@ export default function VacanciesPage() {
                 </span>
               </div>
             </div>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {highlightStats.map((stat) => (
-                <div key={stat.label} className="bg-white shadow rounded-xl p-5 text-center">
-                  <div className="text-3xl font-bold text-brand-600">{stat.value}</div>
-                  <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
+                <div key={stat.label} className="bg-white shadow rounded-xl p-5 text-center transition-transform hover:-translate-y-1 duration-300">
+                  <div className="text-2xl md:text-3xl font-bold text-brand-600">{stat.value}</div>
+                  <div className="text-xs md:text-sm text-gray-600 mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -163,9 +183,9 @@ export default function VacanciesPage() {
       </section>
 
       {/* Vacancies Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
               <p className="text-sm uppercase text-gray-500 tracking-wide">Open positions</p>
               <h3 className="text-2xl font-bold text-gray-900">Current vacancies</h3>
@@ -174,13 +194,27 @@ export default function VacanciesPage() {
           </div>
 
           {vacancies.length === 0 ? (
-            <div className="text-center py-16 text-gray-600">No vacancies are currently open.</div>
+            <div className="flex flex-col items-center justify-center py-20 text-center border border-dashed border-gray-200 rounded-2xl bg-gray-50/50">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-6">
+                <SearchX className="h-8 w-8 text-gray-400" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">No vacancies found</h3>
+              <p className="text-gray-600 max-w-md mx-auto mb-8">
+                We don't have any matching positions right now, but we are always looking for great talent.
+              </p>
+              <Link 
+                href="/contact"
+                className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-700 hover:bg-brand-50 px-4 py-2 rounded-lg transition-colors"
+              >
+                Send us your CV anyway <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {vacancies.map((vacancy) => (
                 <div
                   key={vacancy.id}
-                  className="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden"
+                  className="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                 >
                   <div className="p-6 space-y-4">
                     <div className="flex items-start justify-between gap-3">
