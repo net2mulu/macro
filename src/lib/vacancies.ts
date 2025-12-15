@@ -30,9 +30,11 @@ export type VacancyListResponse = {
 type StrapiVacancy = {
   id: number
   documentId?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   attributes?: Record<string, any>
   // Flat fallbacks (some Strapi endpoints return flattened payloads)
   title?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   description?: any
   employment_type?: string
   employmentType?: string

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function TestimonialSection() {
@@ -90,7 +90,7 @@ export default function TestimonialSection() {
             What Our <span className="text-brand-600">Clients Say</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Don't just take our word for it. See what our satisfied clients have to say about working with MACRO.
+            Don&apos;t just take our word for it. See what our satisfied clients have to say about working with MACRO.
           </p>
         </motion.div>
 

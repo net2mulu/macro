@@ -197,62 +197,59 @@ import { BaseProject, ProjectDetail, TeamMember, StrapiContentBlock } from './in
 const API_URL = (process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.macrogc.com').replace(/\/$/, '')
 
 // --- UTILITY TYPES ---
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StrapiDataItem<T> = {
-  id: number
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  attributes: Record<string, any>
+  id: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  attributes: T | Record<string, any>
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type StrapiListResponse<T> = { data: StrapiDataItem<T>[] }
 
 // --- CORE FETCH HELPER ---
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function fetchStrapiData(path: string): Promise<any> {
-  const fullUrl = `${API_URL}${path}`
+  const fullUrl = `${API_URL}${path}`
 
-  const headers = {
-    'Content-Type': 'application/json',
-  }
+  const headers = {
+    'Content-Type': 'application/json',
+  }
 
-  const response = await fetch(fullUrl, {
-    method: 'GET',
-    headers,
-    cache: 'no-store',
-  })
+  const response = await fetch(fullUrl, {
+    method: 'GET',
+    headers,
+    cache: 'no-store',
+  })
 
-  if (!response.ok) {
-    const errorBody = await response.text()
-    console.error(`Strapi API Error: ${response.status} ${response.statusText}`, errorBody)
+  if (!response.ok) {
+    const errorBody = await response.text()
+    console.error(`Strapi API Error: ${response.status} ${response.statusText}`, errorBody)
     // Throwing an error here is critical to catch the 500 on the page component
-    throw new Error(`Failed to fetch project: ${response.status} ${response.statusText} ${errorBody}`)
-  }
+    throw new Error(`Failed to fetch project: ${response.status} ${response.statusText} ${errorBody}`)
+  }
 
-  return response.json()
+  return response.json()
 }
 
 // Helper to get the full image URL
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getImageUrl = (mediaData: any): string => {
-  const url = mediaData?.data?.attributes?.url || mediaData?.url
-  return url ? (url.startsWith('http') ? url : `${API_URL}${url}`) : '/placeholder.png'
+  const url = mediaData?.data?.attributes?.url || mediaData?.url
+  return url ? (url.startsWith('http') ? url : `${API_URL}${url}`) : '/placeholder.png'
 }
 
 // --- Data Mappers ---
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapStrapiToProject = (item: StrapiDataItem<any>): BaseProject | ProjectDetail => {
-  const attr = item.attributes || {}
-  // Support flat payloads (old or no-populate) and attributes-based payloads (Strapi V4)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const flat: any = item as any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const source: any = flat?.title ? flat : attr
-
-  // Project list fetch only populates category/image. Detail page populates more.
-  // CRITICAL: Grid Images logic adjusted for potential empty array/missing populate
+  const attr = item.attributes || {}
+  // Support flat payloads (old or no-populate) and attributes-based payloads (Strapi V4)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const flat: any = item as any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const source: any = flat?.title ? flat : attr
+
+  // Project list fetch only populates category/image. Detail page populates more.
+  // CRITICAL: Grid Images logic adjusted for potential empty array/missing populate
   const mappedTags = (() => {
     // Prefer populated relation tags
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -267,7 +264,7 @@ const mapStrapiToProject = (item: StrapiDataItem<any>): BaseProject | ProjectDet
   })()
   // CRITICAL: If gridImage is not populated, this will be an empty array.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const mappedGridImages = attr.gridImage?.data?.map((img: any) => getImageUrl(img.attributes)) || [] 
+  const mappedGridImages = attr.gridImage?.data?.map((img: any) => getImageUrl(img.attributes)) || []
 
   const categoryRaw =
     attr.category?.data?.attributes?.name ??
@@ -275,6 +272,7 @@ const mapStrapiToProject = (item: StrapiDataItem<any>): BaseProject | ProjectDet
     (typeof attr.category === 'string' ? attr.category : undefined) ??
     source.category?.name ??
     (typeof source.category === 'string' ? source.category : undefined) ??
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (source.category as any)?.attributes?.name
   const categoryName = typeof categoryRaw === 'string' ? categoryRaw.trim() : ''
 
@@ -294,71 +292,72 @@ const mapStrapiToProject = (item: StrapiDataItem<any>): BaseProject | ProjectDet
     image: getImageUrl(attr.mainImage || source.mainImage),
   }
 
-  const detailData: ProjectDetail = {
-    ...baseData,
-    fullDescription: (source.fullDescription as StrapiContentBlock) || [],
-    contractValue: source.contractValue,
-    startingPoint: source.startingPoint,
-    endingPoint: source.endingPoint,
-    gridImages: mappedGridImages,
-  }
+  const detailData: ProjectDetail = {
+    ...baseData,
+    fullDescription: (source.fullDescription as StrapiContentBlock) || [],
+    contractValue: source.contractValue,
+    startingPoint: source.startingPoint,
+    endingPoint: source.endingPoint,
+    gridImages: mappedGridImages,
+  }
 
-  return detailData
+  return detailData
 }
 
 // CRITICAL FIX: The mapping logic for Team Member has been consolidated and made more robust
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapStrapiToTeamMember = (item: StrapiDataItem<any>): TeamMember => {
-  const attr = item.attributes || {}
-  // Support flat payloads (sample shared) and attributes-based payloads.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const flat = item as any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const source: any = flat?.name ? flat : attr 
+  const attr = item.attributes || {}
+  // Support flat payloads (sample shared) and attributes-based payloads.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const flat = item as any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const source: any = flat?.name ? flat : attr
 
-  const sortOrderValue = Number.isFinite(source?.sortOrder) ? source.sortOrder : 0
-  const rawImage = attr.profilePicture || source?.profilePicture
+  const sortOrderValue = Number.isFinite(source?.sortOrder) ? source.sortOrder : 0
+  const rawImage = attr.profilePicture || source?.profilePicture
 
-  return {
-    id: source?.slug || source?.documentId || item.id?.toString?.() || '',
-    name: source?.name || 'Unknown',
-    position: source?.position || 'Unknown Position',
-    qualification: source?.qualification || 'Unknown Qualification',
-    experience: source?.experience || 'Unknown Experience',
-    profilePicture: getImageUrl(rawImage),
-    sortOrder: sortOrderValue,
-  }
+  return {
+    id: source?.slug || source?.documentId || item.id?.toString?.() || '',
+    name: source?.name || 'Unknown',
+    position: source?.position || 'Unknown Position',
+    qualification: source?.qualification || 'Unknown Qualification',
+    experience: source?.experience || 'Unknown Experience',
+    profilePicture: getImageUrl(rawImage),
+    sortOrder: sortOrderValue,
+  }
 }
 
 // --- EXPORTED FETCHING FUNCTIONS ---
 
 export const fetchAllProjects = async (): Promise<BaseProject[]> => {
-  const populate = 'populate[0]=category&populate[1]=mainImage'
-  const path = `/api/projects?${populate}`
+  const populate = 'populate[0]=category&populate[1]=mainImage'
+  const path = `/api/projects?${populate}`
 
-  const json: StrapiListResponse<BaseProject> = await fetchStrapiData(path)
+  const json: StrapiListResponse<BaseProject> = await fetchStrapiData(path)
 
-  return json.data ? (json.data.map(mapStrapiToProject) as BaseProject[]) : []
+  return json.data ? (json.data.map(mapStrapiToProject) as BaseProject[]) : []
 }
 
 export const fetchProjectBySlug = async (slug: string): Promise<ProjectDetail | null> => {
-  // FIX 500: Simplified populate to avoid potential errors from misconfigured tags/gridImage
-  const populate = 'populate[0]=category&populate[1]=mainImage' 
-  const path = `/api/projects?filters[slug][$eq]=${slug}&${populate}`
+  // FIX 500: Simplified populate to avoid potential errors from misconfigured tags/gridImage
+  const populate = 'populate[0]=category&populate[1]=mainImage'
+  const path = `/api/projects?filters[slug][$eq]=${slug}&${populate}`
 
-  const json: StrapiListResponse<ProjectDetail> = await fetchStrapiData(path)
+  const json: StrapiListResponse<ProjectDetail> = await fetchStrapiData(path)
 
-  if (!json.data || json.data.length === 0) {
-    return null
-  }
-  
-  return mapStrapiToProject(json.data[0] as StrapiDataItem<ProjectDetail>) as ProjectDetail
+  if (!json.data || json.data.length === 0) {
+    return null
+  }
+
+  return mapStrapiToProject(json.data[0] as StrapiDataItem<ProjectDetail>) as ProjectDetail
 }
 
 export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
-  // FIX: Removed the invalid 'sort' parameter and ensure populate works.
-  const path = `/api/team-members?populate=profilePicture`
+  // FIX: Removed the invalid 'sort' parameter and ensure populate works.
+  const path = `/api/team-members?populate=profilePicture`
 
-  const json: StrapiListResponse<TeamMember> = await fetchStrapiData(path)
+  const json: StrapiListResponse<TeamMember> = await fetchStrapiData(path)
 
-  return json.data ? (json.data.map(mapStrapiToTeamMember) as TeamMember[]) : []
+  return json.data ? (json.data.map(mapStrapiToTeamMember) as TeamMember[]) : []
 }

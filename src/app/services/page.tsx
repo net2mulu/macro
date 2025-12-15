@@ -166,7 +166,7 @@ export default function ServicesPage() {
             <h2 className="text-4xl font-bold mb-6">How We Work</h2>
             <p className="text-xl leading-relaxed mb-8">
               Our general contracting services help ensure that your project moves forward as smoothly as possible, 
-              from pre-construction to finish. We'll guide you through the entire process, offering scheduling, 
+              from pre-construction to finish. We&apos;ll guide you through the entire process, offering scheduling, 
               quality control, and supervision.
             </p>
             <p className="text-lg leading-relaxed">

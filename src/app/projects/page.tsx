@@ -1,7 +1,7 @@
 // app/projects/page.tsx
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Calendar, MapPin, ArrowRight, Loader2 } from 'lucide-react'
@@ -17,7 +17,7 @@ export default function ProjectsPage() {
   
   // Type assertion for safety
   const { data: projects = [], isLoading, error } = useProjects() as { data: BaseProject[], isLoading: boolean, error: unknown }
-  const { data: categoriesData = [], isLoading: categoriesLoading } = useCategories() as { data: Category[], isLoading: boolean }
+   const { data: categoriesData = [] } = useCategories() as { data: Category[], isLoading: boolean }
 
   // Normalize projects data to ensure 'category' field is always a string and slug is present.
   const normalizedProjects = useMemo(() => {
@@ -26,24 +26,28 @@ export default function ProjectsPage() {
       const categoryValue =
         typeof p.category === 'string'
           ? p.category
-          : (p as any)?.category?.name || '' // Fallback extraction for nested category object
+           // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          : (p as any)?.category?.name || '' // Fallback extraction for nested category object
       return {
         ...p,
         category: categoryValue,
-        slug: p.slug || p.id,
-      }
+         slug: (p.slug || p.id || '').toString(),
+      }
     })
   }, [projects])
   
-  // Function to shuffle array randomly
-  const shuffleArray = <T,>(array: T[]): T[] => {
-    const shuffled = [...array]
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-    }
-    return shuffled
-  }
+   // State for shuffled projects to ensure hydration stability
+  const [shuffledProjects, setShuffledProjects] = useState<BaseProject[]>([])
+
+  useEffect(() => {
+    const shuffled = [...normalizedProjects]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setShuffledProjects(shuffled)
+  }, [normalizedProjects])
 
   const categories = useMemo(() => {
     // FIX: Explicitly map the category objects to their string names using the Category interface
@@ -71,13 +75,13 @@ export default function ProjectsPage() {
   // Filter projects based on selected category and randomize for "All Projects"
   const allFilteredProjects = useMemo(() => {
     if (selectedCategory === 'All Projects') {
-      // Use normalized data
-      return shuffleArray(normalizedProjects)
+       // Use normalized data
+      return shuffledProjects.length > 0 ? shuffledProjects : normalizedProjects
     }
     const target = normalizeCategory(selectedCategory)
     // Filter normalized data
-    return normalizedProjects.filter((project) => normalizeCategory(project.category) === target)
-  }, [selectedCategory, normalizedProjects])
+     return normalizedProjects.filter((project) => normalizeCategory(project.category) === target)
+  }, [selectedCategory, normalizedProjects, shuffledProjects])
 
   // Show only first 9 projects initially, unless showAllProjects is true
   const filteredProjects = showAllProjects ? allFilteredProjects : allFilteredProjects.slice(0, 9)
@@ -332,7 +336,7 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Have a Project in Mind?</h2>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Let's work together to bring your construction vision to life
+             Let&apos;s work together to bring your construction vision to life
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -35,6 +35,7 @@ function extractText(fullDescription: unknown): string {
 
   if (Array.isArray(fullDescription)) {
     return (fullDescription as StrapiContentBlock)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .map((block: any) => block?.children?.map((c: any) => c?.text).join(' ') || '')
       .filter(Boolean)
       .join('\n\n')

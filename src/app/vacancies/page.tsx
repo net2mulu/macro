@@ -200,7 +200,7 @@ export default function VacanciesPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">No vacancies found</h3>
               <p className="text-gray-600 max-w-md mx-auto mb-8">
-                We don't have any matching positions right now, but we are always looking for great talent.
+                We don&apos;t have any matching positions right now, but we are always looking for great talent.
               </p>
               <Link 
                 href="/contact"

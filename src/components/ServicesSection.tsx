@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Building2, MapPin, Zap, Home, Wrench, Users } from 'lucide-react'
+import { Building2, MapPin, Zap, Home, Users } from 'lucide-react'
 import Image from 'next/image'
 
 export default function ServicesSection() {
@@ -153,7 +153,7 @@ export default function ServicesSection() {
           <h3 className="text-2xl font-bold mb-4">Our General Contracting Services</h3>
           <p className="text-lg leading-relaxed">
             Our general contracting services help ensure that your project moves forward as smoothly as possible, 
-            from pre-construction to finish. We'll guide you through the entire process, offering scheduling, 
+            from pre-construction to finish. We&apos;ll guide you through the entire process, offering scheduling, 
             quality control, and supervision. We will also maintain our dedication to promoting a safe construction 
             site, and handle the many unique challenges that arise along the way.
           </p>

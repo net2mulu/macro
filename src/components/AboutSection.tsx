@@ -91,7 +91,7 @@ export default function AboutSection() {
                 </li>
                 <li className="flex items-start">
                   <span className="text-brand-600 mr-2">✓</span>
-                  <span>Contributing to Ethiopia's transformation through real estate and PPPs</span>
+                  <span>Contributing to Ethiopia&apos;s transformation through real estate and PPPs</span>
                 </li>
               </ul>
             </div>
@@ -116,12 +116,12 @@ export default function AboutSection() {
             <div className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-600 leading-relaxed">
-                To stand among Africa's most trusted and diversified infrastructure and construction 
+                To stand among Africa&apos;s most trusted and diversified infrastructure and construction 
                 solution providers — delivering excellence in engineering, real estate, and industrial 
-                production while driving Ethiopia's sustainable development and regional competitiveness.
+                production while driving Ethiopia&apos;s sustainable development and regional competitiveness.
               </p>
               <p className="text-sm text-gray-500 mt-4 italic">
-                "Building Ethiopia's Foundation, Powering Its Future."
+                &quot;Building Ethiopia&apos;s Foundation, Powering Its Future.&quot;
               </p>
             </div>
           </motion.div>

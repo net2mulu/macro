@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import { Building2, Target, Eye, Shield, Award, MapPin, Calendar, Users } from 'lucide-react'
+import { Building2, Target, Eye, Shield, Award, MapPin, Calendar } from 'lucide-react'
 import Image from 'next/image'
 
 export default function AboutPage() {
@@ -94,7 +94,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-bold mb-6 text-center">
-              Building Ethiopia's Foundation, Powering Its Future
+              Building Ethiopia&apos;s Foundation, Powering Its Future
             </h2>
             <h3 className="text-2xl font-semibold mb-8 text-center text-brand-200">
               A Message from the Managing Director
@@ -108,7 +108,7 @@ export default function AboutPage() {
                 Macro General Contractor & Trading Plc.
               </p>
               <p>
-                For nearly three decades, since our inception in 1995, Macro has been a cornerstone of Ethiopia's 
+                For nearly three decades, since our inception in 1995, Macro has been a cornerstone of Ethiopia&apos;s 
                 infrastructure development. Our journey, paved with the successful completion of challenging road 
                 and bridge projects, has been guided by an unwavering commitment to quality, timely delivery, and integrity. 
                 We are grateful for the trust placed in us by the Ethiopian government and people, which has allowed us to 
@@ -238,7 +238,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-bold mb-4">Our General Contracting Services</h3>
             <p className="leading-relaxed">
               Our general contracting services help ensure that your project moves forward as smoothly as possible, 
-              from pre-construction to finish. We'll guide you through the entire process, offering scheduling, 
+              from pre-construction to finish. We&apos;ll guide you through the entire process, offering scheduling, 
               quality control, and supervision. We will also maintain our dedication to promoting a safe 
               construction site, and handle the many unique challenges that arise along the way.
             </p>

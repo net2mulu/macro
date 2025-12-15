@@ -13,7 +13,8 @@ export interface StrapiProject {
     location: string
     client: string
     date: string
-    tags?: string[]
+    tags?: string[] | { data: Array<{ attributes: { name: string } }> } | Array<{ name: string; attributes?: { name: string } }>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     category?: any
     image?: { data?: { attributes: { url: string } } }
     mainImage?: { data?: { attributes: { url: string } } }
@@ -37,6 +38,7 @@ export interface StrapiProject {
   client?: string
   date?: string
   tags?: string[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   category?: any
   image?: { data?: { attributes: { url: string } } }
   mainImage?: { data?: { attributes: { url: string } } }
@@ -77,6 +79,7 @@ export interface StrapiResponse<T> {
 }
 
 // Helper function to get image URL from Strapi
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getStrapiImageUrl(image: any): string {
   if (!image) {
     return '/placeholder.png'
@@ -134,18 +137,22 @@ export function getStrapiImageUrl(image: any): string {
 
 // Helper function to get multiple image URLs
 // Based on Strapi REST API documentation: https://docs.strapi.io/cms/api/rest/interactive-query-builder
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getStrapiImageUrls(images: any): string[] {
   if (!images) return []
 
   // Handle array of strings (direct URLs)
   if (Array.isArray(images) && typeof images[0] === 'string') {
-    return images.map((u) => getStrapiImageUrl(u)).filter(Boolean)
+    return (images as string[]).map((u) => getStrapiImageUrl(u)).filter(Boolean)
   }
+
 
   // Handle Strapi media structure with data array
   // Format: { data: [{ id, attributes: { url, ... } }] } or { data: [{ id, url, ... }] }
   if (images?.data && Array.isArray(images.data)) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return images.data.map((img: any) => {
+
       // Case 1: img.attributes.url (nested attributes structure)
       if (img?.attributes?.url) {
         return getStrapiImageUrl({ data: { attributes: img.attributes } })
@@ -174,6 +181,7 @@ export function getStrapiImageUrls(images: any): string[] {
   // Handle array of image objects directly (without data wrapper)
   // Format: [{ attributes: { url } }] or [{ url }]
   if (Array.isArray(images) && typeof images[0] === 'object') {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return images.map((img: any) => {
       if (img?.attributes?.url) {
         return getStrapiImageUrl({ data: { attributes: img.attributes } })
@@ -205,6 +213,7 @@ export function transformProject(strapiProject: StrapiProject) {
     attr?.category?.attributes?.name ??
     attr?.category?.name ??
     (typeof attr?.category === 'string' ? attr.category : undefined) ??
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr?.category as any)?.attributes?.name
   const categoryName =
     (typeof categoryRaw === 'string' ? categoryRaw.trim() : '') ||
@@ -212,16 +221,21 @@ export function transformProject(strapiProject: StrapiProject) {
 
   // Extract tags - handle various formats
   const tagsRaw = (() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (Array.isArray((attr as any)?.tags?.data)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (attr as any).tags.data.map((t: any) => t?.attributes?.name || t?.name).filter(Boolean)
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (Array.isArray((attr as any)?.tags)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (attr as any).tags.map((t: any) => (typeof t === 'string' ? t : t?.name || t?.attributes?.name)).filter(Boolean)
     }
     return []
   })()
 
   // Extract image - check multiple possible field names and structures
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const imageData = attr.mainImage || attr.image || (attr as any).main_image || (attr as any).projectImage
   const imageUrl = getStrapiImageUrl(imageData)
 
@@ -261,27 +275,40 @@ export function transformProject(strapiProject: StrapiProject) {
   const allImageFields = {
     mainImage: attr.mainImage,
     image: attr.image,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     main_image: (attr as any).main_image,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     projectImage: (attr as any).projectImage,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     thumbnail: (attr as any).thumbnail,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     coverImage: (attr as any).coverImage,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     cover_image: (attr as any).cover_image,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     photo: (attr as any).photo,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     picture: (attr as any).picture,
   }
 
   // Extract grid images - try multiple field name variations
   const gridImagesRaw =
     attr.gridImages ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr as any).grid_images ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr as any).gridImage ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr as any).gallery ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr as any).galleryImages ||
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (attr as any).images
   const gridImagesUrls = getStrapiImageUrls(gridImagesRaw)
 
   // Debug: log all fields to find image
   if (process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const imageFields = Object.entries(allImageFields).filter(([_, value]) => value !== undefined && value !== null)
     if (imageFields.length > 0) {
       console.log(`✅ Found image fields for "${attr.title}":`, imageFields)
