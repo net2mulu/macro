@@ -1,6 +1,13 @@
 // Strapi API configuration and utilities
 
 const STRAPI_URL = (process.env.NEXT_PUBLIC_STRAPI_URL || 'https://cms.macrogc.com').replace(/\/$/, '')
+if (typeof window !== 'undefined') {
+  console.log('🔌 STRAPI Config:', {
+    url: STRAPI_URL,
+    env: process.env.NEXT_PUBLIC_STRAPI_URL,
+    fallback: 'https://cms.macrogc.com'
+  })
+}
 const STRAPI_API_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN || ''
 
 export interface StrapiProject {

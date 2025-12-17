@@ -30,19 +30,18 @@ export default function Header() {
   return (
     <>
       {/* Main Header */}
-      <header className={`fixed w-full top-0 z-40 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/30 backdrop-blur-md shadow-lg' 
+      <header className={`fixed w-full top-0 z-40 transition-all duration-300 ${isScrolled
+          ? 'bg-white/30 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
-      }`}>
+        }`}>
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <Image 
-                src={isScrolled ? "/black.png" : "/white.png"} 
-                alt="MACRO Logo" 
-                width={120} 
+              <Image
+                src={isScrolled ? "/blackLogo.png" : "/whiteLogo.png"}
+                alt="MACRO Logo"
+                width={120}
                 height={60}
                 className="h-12 w-auto object-contain"
                 priority
@@ -55,11 +54,10 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`font-medium transition-colors duration-200 ${
-                    isScrolled 
-                      ? 'text-gray-700 hover:text-brand-600' 
+                  className={`font-medium transition-colors duration-200 ${isScrolled
+                      ? 'text-gray-700 hover:text-brand-600'
                       : 'text-white hover:text-brand-300'
-                  }`}
+                    }`}
                 >
                   {item.name}
                 </Link>
@@ -70,9 +68,8 @@ export default function Header() {
             <div className="md:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`p-2 rounded-md ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
+                className={`p-2 rounded-md ${isScrolled ? 'text-gray-700' : 'text-white'
+                  }`}
               >
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
